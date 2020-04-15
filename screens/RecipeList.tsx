@@ -1,8 +1,8 @@
 import React,{Component, useState, useEffect} from 'react';
-import {Text, View, StyleSheet, FlatList} from 'react-native';
+import {Text, View, StyleSheet, FlatList, AsyncStorage} from 'react-native';
+import {SearchBar, Button} from 'react-native-elements';
 import {ActionCreators} from '../actions';
 import {bindActionCreators} from 'redux';
-import {AsyncStorage} from 'react-native';
 import { connect } from 'react-redux';
 import {RecipeCategory} from '../models/RecipeCategory'; 
 import {Recipe} from '../models/Recipe';
@@ -16,21 +16,30 @@ interface ListProps {
     categories: any,
     recipes: any,
     fetchRecipes: any,
-    navigation: any  
+    navigation: any,
+    init: boolean  
 };
 
 interface ListState {
     isLoading: any,
     categories:RecipeCategory[],
-    recipes:Recipe[]
+    recipes:Recipe[],
+    numColumns: number,
+    search: string
 };
 class RecipeList extends Component<ListProps, ListState> {
     // Before the component mounts, we initialise our state
-
+    
     constructor(props: ListProps) {
         super(props);
+        this.state = {isLoading:"",categories:[], recipes: [], search: "",numColumns:1};
         this.recipeClicked = this.recipeClicked.bind(this);
+       // this.updateSearch = this.updateSearch.bind(this);
     }
+/*
+    updateSearch(search: string){
+        this.setState({ search });
+    };*/
 
     getFilteredCategories() {
         let {categories} = this.props;
@@ -49,6 +58,15 @@ class RecipeList extends Component<ListProps, ListState> {
         this.props.fetchCategories();
     }
 
+    selectedView(value: string) {
+        let numColumns = 1;
+        if(value==='Grid') {
+            numColumns = 2;
+        }
+        this.setState({
+            numColumns: numColumns
+        });
+    }
     recipeClicked(id: number) {
         //Route for navigation
         let {navigation} = this.props;
@@ -59,6 +77,7 @@ class RecipeList extends Component<ListProps, ListState> {
     // render will know everything!
     render() {
       let {categories, recipes} = this.props;  
+      let {search, numColumns} = this.state;
       if(!categories) {
           categories = [];
       }
@@ -66,8 +85,6 @@ class RecipeList extends Component<ListProps, ListState> {
       if(!recipes) {
           recipes = []
       }
-
-      console.log("The recipes is",recipes);
 
       return (
         <View style={styles.container}>
@@ -77,7 +94,12 @@ class RecipeList extends Component<ListProps, ListState> {
                     onValueChange={(value) => this.props.fetchRecipes(value)}
                     items={this.getFilteredCategories()}
                 />
-            {recipes ?<FlatList numColumns={1} data={recipes} keyExtractor={item => item["idMeal"]} renderItem={({item}) => <RecipeCard callRecipe={this.recipeClicked}  recipe={item} />} />:  null}
+                
+                <View>
+                    <Button title="List" style={{marginBottom: 15}} onPress={()=>{ this.selectedView("List")}} />
+                    <Button title="Grid" onPress={()=>{ this.selectedView("Grid")}} />
+                </View>    
+            {recipes ?<FlatList  key = {( this.state.numColumns==2 ) ? 1 : 0 } numColumns={numColumns} data={recipes} keyExtractor={item => item["idMeal"]} renderItem={({item}) => <RecipeCard callRecipe={this.recipeClicked} size={numColumns}  recipe={item} />} />:  null}
             </View>    
         </View>    
       )

@@ -5,19 +5,24 @@ import {Recipe} from '../models/Recipe';
 import { ActivityIndicator } from 'react-native';
 type Props = {
     recipe: Recipe,
-    callRecipe: any
+    callRecipe: any,
+    size: number
 };
 
 
-const RecipeCard = ({recipe,callRecipe}: Props) => {
+const RecipeCard = ({recipe,size,callRecipe}: Props) => {
     return(
         < TouchableOpacity onPress={()=>{ callRecipe(recipe.idMeal) }}>
             <Card title={recipe.strMeal}
+                titleStyle={{
+                    fontSize: 13
+                }}
+                containerStyle ={size==1?styles.listContainer: styles.gridContainer}
             >
             <View style={styles.container}>
                     <Image
                         resizeMode="cover"
-                        style={styles.image}
+                        style={size==1? styles.listImage: styles.gridImage}
                         PlaceholderContent={<ActivityIndicator />}
                         source={{ uri: recipe.strMealThumb }}
                     />
@@ -29,13 +34,23 @@ const RecipeCard = ({recipe,callRecipe}: Props) => {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      alignItems:"center"
+        flex: 1,
+        alignItems:"center"
     },
-    image: {
-      width: 300,
-      height: 200
+    listImage: {
+        width: 300,
+        height: 300  
     },
+    gridImage: {
+        width: 150,
+        height: 150
+    },
+    listContainer: {
+        width: 350
+    },
+    gridContainer: {
+        width: 170
+    }
 });
 
 export default RecipeCard;
