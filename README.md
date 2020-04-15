@@ -12,6 +12,6 @@ Libraries Used
 
 Screenshots
 
-![Alt text](/screenshots/list.png?raw=true "Optional Title")
+![Alt text](/screenshots/list.png?raw=true "List Image")
 
-![Alt text](/screenshots/detail.png?raw=true "Optional Title")
+![Alt text](/screenshots/detail.png?raw=true "Detail Image")
