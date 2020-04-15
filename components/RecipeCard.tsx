@@ -10,7 +10,7 @@ type Props = {
 
 const RecipeCard = ({recipe}: Props) => {
     return(
-        <Card title="MEAL"
+        <Card title={recipe.strMeal}
         
         >
            <View style={styles.container}>
@@ -19,7 +19,6 @@ const RecipeCard = ({recipe}: Props) => {
                     style={styles.image}
                     source={{ uri: recipe.strMealThumb }}
                 />
-                <Text>{recipe.strMeal}</Text>
             </View>
         </Card>
     )
@@ -28,10 +27,10 @@ const RecipeCard = ({recipe}: Props) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent:"center"
+      alignItems:"center"
     },
     image: {
-      width: 200,
+      width: 300,
       height: 200
     },
 });

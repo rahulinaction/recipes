@@ -1,6 +1,6 @@
 //This is the compact model which has only 3 parameters
 export interface Recipe {
-    strMeal: number;
+    strMeal: string;
     strMealThumb: string;
     idMeal: number;
 };
