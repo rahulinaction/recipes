@@ -73,7 +73,7 @@ class RecipeList extends Component<ListProps, ListState> {
         <View style={styles.container}>
             <View style={styles.selectContainer}>
                 <RNPickerSelect
-                    
+                    style= {pickerStyle}
                     onValueChange={(value) => this.props.fetchRecipes(value)}
                     items={this.getFilteredCategories()}
                 />
@@ -105,14 +105,25 @@ const styles  = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 10,
         borderColor:"red"
-    },
-    select: {
-        borderWidth: 4,
-        borderColor: "#20232a",
-        borderRadius: 6,
-        marginBottom: 40
     }
 });
+
+const pickerStyle = {
+	inputIOS: {
+		color: 'black',
+		paddingTop: 13,
+		paddingHorizontal: 10,
+        paddingBottom: 12,
+        borderWidth: 2,
+        borderColor: "gray",
+        borderRadius: 6,
+        marginBottom: 40
+	},
+	inputAndroid: {
+		color: 'black',
+	},
+	placeholderColor: 'white'
+};
     
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeList);
