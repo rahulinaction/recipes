@@ -1,26 +1,29 @@
 import React,{Component, useState, useEffect} from 'react';
-import {Text, View, Image, StyleSheet} from 'react-native';
-import {Card} from 'react-native-elements';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {Card, Image} from 'react-native-elements';
 import {Recipe} from '../models/Recipe';
-
+import { ActivityIndicator } from 'react-native';
 type Props = {
-    recipe: Recipe
+    recipe: Recipe,
+    callRecipe: any
 };
 
 
-const RecipeCard = ({recipe}: Props) => {
+const RecipeCard = ({recipe,callRecipe}: Props) => {
     return(
-        <Card title={recipe.strMeal}
-        
-        >
-           <View style={styles.container}>
-                <Image
-                    resizeMode="cover"
-                    style={styles.image}
-                    source={{ uri: recipe.strMealThumb }}
-                />
-            </View>
-        </Card>
+        < TouchableOpacity onPress={()=>{ callRecipe(recipe.idMeal) }}>
+            <Card title={recipe.strMeal}
+            >
+            <View style={styles.container}>
+                    <Image
+                        resizeMode="cover"
+                        style={styles.image}
+                        PlaceholderContent={<ActivityIndicator />}
+                        source={{ uri: recipe.strMealThumb }}
+                    />
+                </View>
+            </Card>
+        </ TouchableOpacity>
     )
 }
 

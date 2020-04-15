@@ -15,19 +15,23 @@ interface ListProps {
     fetchCategories: any,
     categories: any,
     recipes: any,
-    fetchRecipes: any  
+    fetchRecipes: any,
+    navigation: any  
 };
 
 interface ListState {
-    "isLoading": any,
-    "categories":RecipeCategory[],
-    "recipes":Recipe[]
+    isLoading: any,
+    categories:RecipeCategory[],
+    recipes:Recipe[]
 };
 class RecipeList extends Component<ListProps, ListState> {
     // Before the component mounts, we initialise our state
-    componentWillMount() {
+
+    constructor(props: ListProps) {
+        super(props);
+        this.recipeClicked = this.recipeClicked.bind(this);
     }
-  
+
     getFilteredCategories() {
         let {categories} = this.props;
         let filteredCategories = [];
@@ -44,7 +48,14 @@ class RecipeList extends Component<ListProps, ListState> {
     componentDidMount() {
         this.props.fetchCategories();
     }
-  
+
+    recipeClicked(id: number) {
+        //Route for navigation
+        let {navigation} = this.props;
+        navigation.navigate('Detail', {
+            recipeId: id
+        });
+    }
     // render will know everything!
     render() {
       let {categories, recipes} = this.props;  
@@ -60,13 +71,13 @@ class RecipeList extends Component<ListProps, ListState> {
 
       return (
         <View style={styles.container}>
-            <Text>Recipe Listing Screen</Text>
             <View style={styles.selectContainer}>
                 <RNPickerSelect
+                    
                     onValueChange={(value) => this.props.fetchRecipes(value)}
                     items={this.getFilteredCategories()}
                 />
-            {recipes ?<FlatList data={recipes} keyExtractor={item => item["idMeal"]} renderItem={({item}) => <RecipeCard recipe={item} />} />:  null}
+            {recipes ?<FlatList numColumns={1} data={recipes} keyExtractor={item => item["idMeal"]} renderItem={({item}) => <RecipeCard callRecipe={this.recipeClicked}  recipe={item} />} />:  null}
             </View>    
         </View>    
       )
@@ -90,6 +101,7 @@ const styles  = StyleSheet.create({
     },
     selectContainer : {
         marginTop: 40,
+        marginBottom: 40,
         paddingHorizontal: 10,
         paddingVertical: 10,
         borderColor:"red"
@@ -98,7 +110,7 @@ const styles  = StyleSheet.create({
         borderWidth: 4,
         borderColor: "#20232a",
         borderRadius: 6,
-     
+        marginBottom: 40
     }
 });
     
