@@ -38,7 +38,7 @@ const RecipeFull = ({recipe}: Props) => {
                 <Text h4 style={styles.ingredientHeader}>Ingredients</Text>
                 {ingredients.map((ingredient, i) => {
                     return (
-                        <RecipeIngredient ingredient={ingredient} />
+                        <RecipeIngredient ingredient={ingredient} key={i} />
                     );
                 })}
                 <AirbnbRating />
