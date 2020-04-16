@@ -22,7 +22,8 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import { createStackNavigator } from 'react-navigation-stack';
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator} from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Provider, connect } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
@@ -32,17 +33,19 @@ import reducer from './reducers';
 //Screens
 import RecipeList from './screens/RecipeList';
 import RecipeDetail from './screens/RecipeDetail';
-
+import RecipeFavorite from './screens/RecipeFavorite';
 
 const loggerMiddleware = createLogger({predicate:(getState, action) => __DEV__ });
 
-
+/* Store addition */
 function configureStore(initialState: object) {
   const enhancer =  compose(applyMiddleware(thunkMiddleware, loggerMiddleware));     
   return createStore(reducer, initialState, enhancer);
 }
 
 const store = configureStore({});
+
+/* Store addition finish */
 
 const  App = ()=> {
   
@@ -54,11 +57,47 @@ const  App = ()=> {
 
 }
 
+/*const switchNavigator = createSwitchNavigator({
+  ResolveAuth:ResolveAuthScreen,
+  loginFlow: createStackNavigator({
+    Signup: SignupScreen,
+    Signin: SigninScreen
+  }),
+  mainFlow: createBottomTabNavigator({
+    trackListFlow: createStackNavigator({
+      TrackList: TrackListScreen,
+      TrackDetail: TrackDetailScreen
+    }),
+    CreateTrack: TrackCreateScreen,
+    Account: AccountScreen,
 
-const AppNavigator = createStackNavigator(
+  })
+})*/
+
+const AppNavigator = createBottomTabNavigator({
+  
+    listFlow: createStackNavigator({
+      List: RecipeList,
+      Detail: RecipeDetail
+    }),
+    Favorite: RecipeFavorite
+},
+{
+  defaultNavigationOptions: ({ navigation }) => ({
+    
+  }),
+  initialRouteName: 'listFlow'
+}
+
+)
+
+
+
+/*const AppNavigator = createBottomTabNavigator(
   {
     List: RecipeList,
-    Detail: RecipeDetail
+    Detail: RecipeDetail,
+    Favorite: RecipeFavorite
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -66,7 +105,7 @@ const AppNavigator = createStackNavigator(
     }),
     initialRouteName: 'List'
   }
-);
+);*/
 
 let Navigation = createAppContainer(AppNavigator);
 

@@ -1,5 +1,5 @@
 import React,{Component, useState, useEffect} from 'react';
-import {Text, ActivityIndicator, View} from 'react-native';
+import {Text, ActivityIndicator, View, Button} from 'react-native';
 import { connect } from 'react-redux';
 import {ActionCreators} from '../actions';
 import {bindActionCreators} from 'redux';
@@ -33,10 +33,11 @@ class RecipeDetail extends Component<DetailProps, DetailsState> {
     }
 
     render() {
-        let {recipe, isLoading} = this.props;
+        let {recipe, navigation, isLoading} = this.props;
 
         return(
             <View>
+            <Button title="Favorite" onPress={()=>{ navigation.navigate("Favorite")}}/>        
             { recipe ? <RecipeFull recipe={recipe} /> : null }
             </View>    
         )
