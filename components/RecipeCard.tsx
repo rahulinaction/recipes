@@ -40,7 +40,7 @@ const RecipeCard = ({recipe,size,callRecipe, likeRecipe}: Props) => {
                             <Text>Like:</Text>
                         </View>
                         <View style={{flex:1}}>
-                            <Icon name='heart' color={likeColor} onPress={() => likeRecipe(recipe.idMeal)} />
+                            <Icon name='heart' size={16} color={likeColor} onPress={() => likeRecipe(recipe.idMeal)} />
                         </View>
                     </View>    
                 </View>
