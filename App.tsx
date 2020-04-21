@@ -35,13 +35,9 @@ import RecipeList from './screens/RecipeList';
 import RecipeDetail from './screens/RecipeDetail';
 import RecipeFavorite from './screens/RecipeFavorite';
 
-const loggerMiddleware = createLogger({predicate:(getState, action) => __DEV__ });
+import configureStore from './store';
 
 /* Store addition */
-function configureStore(initialState: object) {
-  const enhancer =  compose(applyMiddleware(thunkMiddleware, loggerMiddleware));     
-  return createStore(reducer, initialState, enhancer);
-}
 
 const store = configureStore({});
 
