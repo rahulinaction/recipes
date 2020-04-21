@@ -48,15 +48,15 @@ class RecipeFavorite extends Component<FavoriteProps, FavoriteState> {
     }
  
     recipeLiked(id:  number) {
-        this.props.setFavorite(id);
+        const {setFavorite, fetchFavorites} = this.props;
+        setFavorite(id);
+        setTimeout(function(){ fetchFavorites() }, 1000);
     }
 
     render() {
         let {recipes} = this.props;  
-        console.log("The recipes loaded are",recipes);
         return(
             <View style={styles.container}>
-                <Text>Favorite Screen</Text>
                 <View>
                     {recipes ?<FlatList  data={recipes} keyExtractor={item => item["idMeal"]} renderItem={({item}) => <RecipeCard likeRecipe={this.recipeLiked} callRecipe={this.recipeClicked} size={1}  recipe={item} />} />:  null}
                 </View>    
