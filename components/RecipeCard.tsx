@@ -21,7 +21,7 @@ const RecipeCard = ({recipe,size,callRecipe, likeRecipe}: Props) => {
     }
 
     return(
-        < TouchableOpacity onPress={()=>{ callRecipe(recipe.idMeal) }}>
+        < TouchableOpacity onPress={()=>{ callRecipe(recipe) }}>
             <Card title={recipe.strMeal}
                 titleStyle={{
                     fontSize: 13
@@ -40,7 +40,7 @@ const RecipeCard = ({recipe,size,callRecipe, likeRecipe}: Props) => {
                             <Text>Like:</Text>
                         </View>
                         <View style={{flex:1}}>
-                            <Icon name='heart' size={16} color={likeColor} onPress={() => likeRecipe(recipe.idMeal)} />
+                            <Icon name='heart' size={18} color={likeColor} onPress={() => likeRecipe(recipe.idMeal)} />
                         </View>
                     </View>    
                 </View>

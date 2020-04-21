@@ -39,11 +39,12 @@ class RecipeFavorite extends Component<FavoriteProps, FavoriteState> {
         this.props.fetchFavorites();
     }
 
-    recipeClicked(id: number) {
+    recipeClicked(recipe: Recipe) {
   
         let {navigation} = this.props;
          navigation.navigate('Detail', {
-             recipeId: id
+             recipeId: recipe.idMeal,
+             favorite: recipe.favorite
         });
     }
  

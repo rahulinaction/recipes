@@ -89,16 +89,16 @@ class RecipeList extends Component<ListProps, ListState> {
             numColumns: numColumns
         });
     }
-    recipeClicked(id: number) {
+    recipeClicked(recipe: Recipe) {
   
        let {navigation} = this.props;
         navigation.navigate('Detail', {
-            recipeId: id
+            recipeId: recipe.idMeal,
+            favorite: recipe.favorite
         });
     }
 
     recipeLiked(id:  number) {
-        console.log("Recipe liked ",id);
         this.props.setFavorite(id);
     }
     // render will know everything!
