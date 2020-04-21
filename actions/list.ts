@@ -19,7 +19,6 @@ export function fetchCategories() {
             let data = resp.data;
             dispatch(setFetchedCategories(data["categories"]));
         }).catch( (ex: Error) => {
-            console.log("The exception is",ex);
             dispatch(setLoading(false));
         });
     }
@@ -34,13 +33,20 @@ export function fetchRecipes(category: string) {
         dispatch(setLoading(true));
         return Api.get(uri,{}).then(resp => {   
             let data = resp.data;
-            dispatch(setFetchedRecipes(data["meals"]));
+            //Sanitize and add flag here
+            let meals = data["meals"];
+            //We add this for our computation
+            for(let meal of meals) {
+                meal["favorite"] = false;
+            }
+            dispatch(setFetchedRecipes(meals));
         }).catch( (ex: Error) => {
             console.log("The exception is",ex);
             dispatch(setLoading(false));
         });
     }
 }
+
 
 
 export function setFetchedRecipes(recipes: Recipe[]) {

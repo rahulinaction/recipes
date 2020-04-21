@@ -3,4 +3,5 @@ export interface Recipe {
     strMeal: string;
     strMealThumb: string;
     idMeal: number;
+    favorite: boolean;
 };

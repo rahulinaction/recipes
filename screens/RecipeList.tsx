@@ -18,7 +18,8 @@ interface ListProps {
     recipes: any,
     fetchRecipes: any,
     navigation: any,
-    init: boolean  
+    init: boolean,
+    setFavorite: any 
 };
 
 interface ListState {
@@ -37,6 +38,7 @@ class RecipeList extends Component<ListProps, ListState> {
         super(props);
         this.state = {isLoading:"",categories:[], recipes: [], search: "",numColumns:1, init: true, pickerValue: ""};
         this.recipeClicked = this.recipeClicked.bind(this);
+        this.recipeLiked =  this.recipeLiked.bind(this);
         this.getFilteredCategories = this.getFilteredCategories.bind(this);
         this.recipeSelected = this.recipeSelected.bind(this);
     }
@@ -89,10 +91,15 @@ class RecipeList extends Component<ListProps, ListState> {
     }
     recipeClicked(id: number) {
   
-        let {navigation} = this.props;
+       let {navigation} = this.props;
         navigation.navigate('Detail', {
             recipeId: id
         });
+    }
+
+    recipeLiked(id:  number) {
+        console.log("Recipe liked ",id);
+        this.props.setFavorite(id);
     }
     // render will know everything!
     render() {
@@ -122,7 +129,7 @@ class RecipeList extends Component<ListProps, ListState> {
                     <Button title="List" style={{marginBottom: 15}} onPress={()=>{ this.selectedView("List")}} />
                     <Button title="Grid" onPress={()=>{ this.selectedView("Grid")}} />
                 </View>    
-            {recipes ?<FlatList  key = {( this.state.numColumns==2 ) ? 1 : 0 } numColumns={numColumns} data={recipes} keyExtractor={item => item["idMeal"]} renderItem={({item}) => <RecipeCard callRecipe={this.recipeClicked} size={numColumns}  recipe={item} />} />:  null}
+            {recipes ?<FlatList  key = {( this.state.numColumns==2 ) ? 1 : 0 } numColumns={numColumns} data={recipes} keyExtractor={item => item["idMeal"]} renderItem={({item}) => <RecipeCard likeRecipe={this.recipeLiked} callRecipe={this.recipeClicked} size={numColumns}  recipe={item} />} />:  null}
             </View>    
         </View>    
       )
