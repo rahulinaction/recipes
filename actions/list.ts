@@ -48,6 +48,12 @@ export function fetchRecipes(category: string) {
 }
 
 
+export function fetchFavorites() {
+    return {
+        type: types.FETCH_FAVORITES
+    }
+}
+
 
 export function setFetchedRecipes(recipes: Recipe[]) {
     return {

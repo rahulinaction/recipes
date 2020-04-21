@@ -31,6 +31,14 @@ export const fetchRecipes = createReducer({}, {
     })
     let newState = {... state, "recipes": recipes };
     return newState;
+  },
+  [types.FETCH_FAVORITES](state: any, action: any) {
+    let recipes =  state.recipes.filter((recipe: Recipe)=>{
+      return recipe.favorite == true;
+    });
+    
+    let newState = {... state, "favorites": recipes };
+    return newState;
   }
 });
   
