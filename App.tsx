@@ -53,22 +53,7 @@ const  App = ()=> {
 
 }
 
-/*const switchNavigator = createSwitchNavigator({
-  ResolveAuth:ResolveAuthScreen,
-  loginFlow: createStackNavigator({
-    Signup: SignupScreen,
-    Signin: SigninScreen
-  }),
-  mainFlow: createBottomTabNavigator({
-    trackListFlow: createStackNavigator({
-      TrackList: TrackListScreen,
-      TrackDetail: TrackDetailScreen
-    }),
-    CreateTrack: TrackCreateScreen,
-    Account: AccountScreen,
 
-  })
-})*/
 
 const AppNavigator = createBottomTabNavigator({
   
@@ -76,7 +61,10 @@ const AppNavigator = createBottomTabNavigator({
       List: RecipeList,
       Detail: RecipeDetail
     }),
-    Favorite: RecipeFavorite
+    favoriteFlow: createStackNavigator({
+      Favorite: RecipeFavorite,
+      Detail: RecipeDetail
+    })
 },
 {
   defaultNavigationOptions: ({ navigation }) => ({

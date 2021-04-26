@@ -1,5 +1,5 @@
 import React,{Component, useState, useEffect} from 'react';
-import {Text, ActivityIndicator, View, Button} from 'react-native';
+import {Text, ActivityIndicator, View, Button, StyleSheet} from 'react-native';
 import { connect } from 'react-redux';
 import {ActionCreators} from '../actions';
 import {bindActionCreators} from 'redux';
@@ -27,7 +27,7 @@ class RecipeDetail extends Component<DetailProps, DetailsState> {
     static navigationOptions = ({ navigation }: { navigation: NavigationScreenProp<NavigationRoute<DetailProps>, DetailProps>}) => ({
         
         headerRight:() => (
-            <Icon name='heart' size={22}  color={navigation.getParam("favorite")?"red":"black"}  onPress={() => console.log("The param here is",navigation.getParam("favorite"))} />
+            <Icon name='heart' size={22} iconStyle={{marginRight:"20"}}  color={navigation.getParam("favorite")?"red":"black"}  onPress={() => console.log("Favorite") } />
         )
     })
 
@@ -35,10 +35,10 @@ class RecipeDetail extends Component<DetailProps, DetailsState> {
         super(props);
     }
 
+
     componentDidMount() {
         let {navigation, fetchRecipe} = this.props;
         let recipeId = navigation.getParam("recipeId");
-        console.log("Favorite",navigation.getParam("favorite"));
         //Testing for loader
         fetchRecipe(recipeId);
     }
@@ -56,6 +56,9 @@ class RecipeDetail extends Component<DetailProps, DetailsState> {
    
 }
 
+const styles = StyleSheet.create({
+    icon: {"marginRight": 20}
+})
 
 function mapStateToProps(state: any) {
     const { isLoading } = state.setDetailLoading;

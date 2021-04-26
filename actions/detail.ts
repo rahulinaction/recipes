@@ -34,3 +34,10 @@ export function setRecipe(recipe: any) {
         recipe
     }
 }
+
+export function setFavorite(recipe: any) {
+    return {
+        type: types.SET_FAVORITE,
+        recipe
+    }
+}
