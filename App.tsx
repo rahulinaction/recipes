@@ -76,21 +76,6 @@ const AppNavigator = createBottomTabNavigator({
 )
 
 
-
-/*const AppNavigator = createBottomTabNavigator(
-  {
-    List: RecipeList,
-    Detail: RecipeDetail,
-    Favorite: RecipeFavorite
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => ({
-      
-    }),
-    initialRouteName: 'List'
-  }
-);*/
-
 let Navigation = createAppContainer(AppNavigator);
 
 
