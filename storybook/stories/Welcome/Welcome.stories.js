@@ -1,6 +1,13 @@
 import React from 'react';
-import { linkTo } from '@storybook/addon-links';
-import { storiesOf } from '@storybook/react-native';
+import {linkTo} from '@storybook/addon-links';
 import Welcome from '.';
 
-storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
+export default {
+  title: 'Welcome',
+};
+
+export const ToStorybook = () => <Welcome showApp={linkTo('Button')} />;
+
+ToStorybook.story = {
+  name: 'to Storybook',
+};
