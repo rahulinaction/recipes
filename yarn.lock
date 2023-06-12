@@ -1935,6 +1935,11 @@
   resolved "https://registry.npmjs.org/@react-native-community/netinfo/-/netinfo-5.7.1.tgz"
   integrity sha512-ddefrDUgJgeYevk1QQFWQD2n3fq9B7PfYZoBTXw8yYgV5AdXdolFtwt5DnfFHqqibgiQGCd9lNP6SvM6xktu9Q==
 
+"@react-native-community/picker@1.6.0":
+  version "1.6.0"
+  resolved "https://registry.npmjs.org/@react-native-community/picker/-/picker-1.6.0.tgz"
+  integrity sha512-ijB33rCW3m9vu8jbXAcEh+icCmK0pyvCXiGfAwPgGSaFLsmE27dsle3022EbE+dqqQgpxUNtOkrd5C3B+/dcuA==
+
 "@react-native-community/slider@*", "@react-native-community/slider@^4.4.2":
   version "4.4.2"
   resolved "https://registry.npmjs.org/@react-native-community/slider/-/slider-4.4.2.tgz"
@@ -8710,11 +8715,12 @@ react-native-modal@^9.0.0:
     prop-types "^15.6.2"
     react-native-animatable "^1.2.4"
 
-react-native-picker-select@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.npmjs.org/react-native-picker-select/-/react-native-picker-select-7.0.0.tgz"
-  integrity sha512-SO7b7wHfeM07oVTsLhBlT/VDvMXg2aP0Xy5CA+kL7+oV2Bq6nfKTVjpB2+HLVhFik9i/tlq5ROuGdUrfPhl3rg==
+react-native-picker-select@8.0.3:
+  version "8.0.3"
+  resolved "https://registry.npmjs.org/react-native-picker-select/-/react-native-picker-select-8.0.3.tgz"
+  integrity sha512-I52C+7QOxTSbZMefCjuhMjykWiwIcmyqh0AiNp5xlkXHJTonJG6yDhacXW8u1rH1++6aPJ4YFtGuqhjMvcyQxg==
   dependencies:
+    "@react-native-community/picker" "1.6.0"
     lodash.isequal "^4.5.0"
 
 react-native-ratings@^6.3.0:
@@ -8978,6 +8984,15 @@ react@*, "react@^0.14.0 || ^15.0.0 || ^16.0.0", react@^16.0.0, "react@^16.0.0 ||
     loose-envify "^1.1.0"
 
 "react@^15.0.0 || ^16.0.0", react@^16.0.0-0, react@^16.14.0, "react@>=0.14.0 <17.0.0":
+  version "16.14.0"
+  resolved "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
+  integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+
+react@^16.0:
   version "16.14.0"
   resolved "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
   integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
