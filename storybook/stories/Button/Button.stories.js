@@ -1,5 +1,4 @@
 import {action} from '@storybook/addon-actions';
-import {text} from '@storybook/addon-knobs';
 import React from 'react';
 import {Text} from 'react-native';
 import Button from '.';
@@ -12,7 +11,6 @@ export default {
 
 export const WithText = () => (
   <Button onPress={action('clicked-text')}>
-    <Text>{text('Button text', 'Hello Button')}</Text>
   </Button>
 );
 

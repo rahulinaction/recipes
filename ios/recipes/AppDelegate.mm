@@ -2,17 +2,8 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTLinkingManager.h>
-#import <ReactCommon/RCTSampleTurboModule.h>
-#import <ReactCommon/SampleTurboCxxModule.h>
 
-#if !TARGET_OS_TV && !TARGET_OS_UIKITFORMAC
-#import <React/RCTPushNotificationManager.h>
-#endif
 
-#if RCT_NEW_ARCH_ENABLED
-#import <NativeCxxModuleExample/NativeCxxModuleExample.h>
-#import <RNTMyNativeViewComponentView.h>
-#endif
 
 @implementation AppDelegate
 
@@ -21,7 +12,7 @@
   self.moduleName = @"RNTesterApp";
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.
-  self.initialProps = [self prepareInitialProps];
+ self.initialProps = @{};
 
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
@@ -57,57 +48,9 @@
   [RCTJavaScriptLoader loadBundleAtURL:[self sourceURLForBridge:bridge] onProgress:onProgress onComplete:loadCallback];
 }
 
-- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:(const std::string &)name
-                                                      jsInvoker:(std::shared_ptr<facebook::react::CallInvoker>)jsInvoker
-{
-  if (name == std::string([@"SampleTurboCxxModule" UTF8String])) {
-    return std::make_shared<facebook::react::SampleTurboCxxModule>(jsInvoker);
-  }
-#ifdef RCT_NEW_ARCH_ENABLED
-  if (name == std::string([@"NativeCxxModuleExampleCxx" UTF8String])) {
-    return std::make_shared<facebook::react::NativeCxxModuleExample>(jsInvoker);
-  }
-#endif
-  return nullptr;
-}
 
-#if !TARGET_OS_TV && !TARGET_OS_UIKITFORMAC
 
-// Required to register for notifications
-- (void)application:(__unused UIApplication *)application
-    didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
-{
-  [RCTPushNotificationManager didRegisterUserNotificationSettings:notificationSettings];
-}
 
-// Required for the remoteNotificationsRegistered event.
-- (void)application:(__unused UIApplication *)application
-    didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-  [RCTPushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
-}
-
-// Required for the remoteNotificationRegistrationError event.
-- (void)application:(__unused UIApplication *)application
-    didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
-{
-  [RCTPushNotificationManager didFailToRegisterForRemoteNotificationsWithError:error];
-}
-
-// Required for the remoteNotificationReceived event.
-- (void)application:(__unused UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification
-{
-  [RCTPushNotificationManager didReceiveRemoteNotification:notification];
-}
-
-// Required for the localNotificationReceived event.
-- (void)application:(__unused UIApplication *)application
-    didReceiveLocalNotification:(UILocalNotification *)notification
-{
-  [RCTPushNotificationManager didReceiveLocalNotification:notification];
-}
-
-#endif
 
 #pragma mark - RCTComponentViewFactoryComponentProvider
 
