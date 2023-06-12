@@ -396,7 +396,7 @@ PODS:
     - React-Core
   - RNGestureHandler (2.10.0):
     - React-Core
-  - RNReanimated (2.10.0):
+  - RNReanimated (2.15.0):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
@@ -426,8 +426,8 @@ PODS:
   - RNScreens (3.20.0):
     - React-Core
     - React-RCTImage
-  - RNVectorIcons (6.6.0):
-    - React
+  - RNVectorIcons (9.0.0):
+    - React-Core
   - SocketRocket (0.6.0)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -660,9 +660,9 @@ SPEC CHECKSUMS:
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNDateTimePicker: 7ecd54a97fc3749f38c3c89a171f6cbd52f3c142
   RNGestureHandler: e145476da655f3dbc48ef2f0a08cf7a34338c02b
-  RNReanimated: 94a78eea625198e7bfbd31e78738eaa78b5b257c
+  RNReanimated: 29295af754cdd6f8e4428427d4195e02ea8766e0
   RNScreens: 218801c16a2782546d30bd2026bb625c0302d70f
-  RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
+  RNVectorIcons: 4143ba35feebab8fdbe6bc43d1e776b393d47ac8
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Yoga: d56980c8914db0b51692f55533409e844b66133c
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a

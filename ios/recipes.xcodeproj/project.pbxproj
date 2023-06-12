@@ -3,52 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* recipesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* recipesTests.m */; };
-		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1899507AAB3A485B96204E6F /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C611A52B29FC4573828AEA3F /* FontAwesome5_Brands.ttf */; };
-		2CC63423AA174B2A808A2FA8 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42DFA9274B9840109DE107F7 /* FontAwesome5_Regular.ttf */; };
-		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		2D02E4BC1E0B4A80006451C7 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* recipesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* recipesTests.m */; };
-		398DD0BA16EB4BF290F3E39F /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB3EFBD4EE047608ECC40A7 /* AntDesign.ttf */; };
-		530A41179FB34CFD8A01724D /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 158DAEC3F26042E6ACA23842 /* EvilIcons.ttf */; };
-		596F1E3C244EACD100A59B6E /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596F1E2C244EACD000A59B6E /* Fontisto.ttf */; };
-		596F1E3D244EACD100A59B6E /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596F1E2D244EACD000A59B6E /* Octicons.ttf */; };
-		596F1E3E244EACD100A59B6E /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596F1E2E244EACD000A59B6E /* Feather.ttf */; };
-		596F1E3F244EACD100A59B6E /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596F1E2F244EACD000A59B6E /* Entypo.ttf */; };
-		596F1E40244EACD100A59B6E /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596F1E30244EACD000A59B6E /* FontAwesome5_Brands.ttf */; };
-		596F1E41244EACD100A59B6E /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596F1E31244EACD000A59B6E /* MaterialCommunityIcons.ttf */; };
-		596F1E42244EACD100A59B6E /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596F1E32244EACD000A59B6E /* AntDesign.ttf */; };
-		596F1E43244EACD100A59B6E /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596F1E33244EACD000A59B6E /* Foundation.ttf */; };
-		596F1E44244EACD100A59B6E /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596F1E34244EACD000A59B6E /* Ionicons.ttf */; };
-		596F1E45244EACD100A59B6E /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596F1E35244EACD000A59B6E /* FontAwesome5_Solid.ttf */; };
-		596F1E46244EACD100A59B6E /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596F1E36244EACD000A59B6E /* FontAwesome5_Regular.ttf */; };
-		596F1E47244EACD100A59B6E /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596F1E37244EACD000A59B6E /* FontAwesome.ttf */; };
-		596F1E48244EACD100A59B6E /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596F1E38244EACD000A59B6E /* Zocial.ttf */; };
-		596F1E49244EACD100A59B6E /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596F1E39244EACD000A59B6E /* EvilIcons.ttf */; };
-		596F1E4A244EACD100A59B6E /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596F1E3A244EACD000A59B6E /* SimpleLineIcons.ttf */; };
-		596F1E4B244EACD100A59B6E /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596F1E3B244EACD000A59B6E /* MaterialIcons.ttf */; };
-		5DB3A03E206744AEAAAE9961 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 143F409C2A714CD08394195D /* Fontisto.ttf */; };
-		63087C1A1E114B40B5F606CF /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D02FA9BC251748E6B63E7A74 /* Ionicons.ttf */; };
-		73828C7D48174F41AAD6BD32 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42AB1171DAE742FB8B7E9CD8 /* Feather.ttf */; };
-		8C7949AEC2774695B0B39A24 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 80537E5725D94998BA38736B /* MaterialCommunityIcons.ttf */; };
-		9F43ACF06F4243CE9907CE82 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD547E65E676464490E476F9 /* Octicons.ttf */; };
-		B1677421F8234469B84091E8 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9CA764657C664767B7D57DDA /* Zocial.ttf */; };
-		CBDD0815B75E400F9AA678A9 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D555F98DCFF3456B87970B62 /* SimpleLineIcons.ttf */; };
-		CEEAD4303D264774A8873DFB /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B968B3C00EA74C948E445FF4 /* FontAwesome5_Solid.ttf */; };
+		AF202B252A363F9000DE4933 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
+		AF202B272A36417800DE4933 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		CF5036E92654E7F437D60B7A /* libPods-recipes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41690A369A2B6839662044E2 /* libPods-recipes.a */; };
-		EBC673DE9AA3446384A8C5EE /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B4916AB1CA5F4DD191C13702 /* Entypo.ttf */; };
-		EE3F63F4D33449B097AD3D37 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2997859444F4E628B981B55 /* MaterialIcons.ttf */; };
-		F8ACA801BBFB44D88A1DFEE5 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5145F59848C347E0BC211DA3 /* Foundation.ttf */; };
-		F960328C88BD437192C57AB0 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D0AC1EECAC34E74A3B00D73 /* FontAwesome.ttf */; };
 		F969AC3D17217B9D4753BF45 /* libPods-recipes-recipesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD713206B8453E6CC5C47C44 /* libPods-recipes-recipesTests.a */; };
 /* End PBXBuildFile section */
 
@@ -76,7 +45,7 @@
 		00E356F21AD99517003FC87E /* recipesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = recipesTests.m; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* recipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = recipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = recipes/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = recipes/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.mm; path = recipes/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = recipes/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = recipes/Info.plist; sourceTree = "<group>"; };
@@ -181,7 +150,7 @@
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
-				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -383,7 +352,8 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1130;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
@@ -436,40 +406,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF202B272A36417800DE4933 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				596F1E48244EACD100A59B6E /* Zocial.ttf in Resources */,
-				596F1E3F244EACD100A59B6E /* Entypo.ttf in Resources */,
-				596F1E44244EACD100A59B6E /* Ionicons.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				398DD0BA16EB4BF290F3E39F /* AntDesign.ttf in Resources */,
-				596F1E42244EACD100A59B6E /* AntDesign.ttf in Resources */,
-				EBC673DE9AA3446384A8C5EE /* Entypo.ttf in Resources */,
-				530A41179FB34CFD8A01724D /* EvilIcons.ttf in Resources */,
-				73828C7D48174F41AAD6BD32 /* Feather.ttf in Resources */,
-				596F1E46244EACD100A59B6E /* FontAwesome5_Regular.ttf in Resources */,
-				F960328C88BD437192C57AB0 /* FontAwesome.ttf in Resources */,
-				596F1E47244EACD100A59B6E /* FontAwesome.ttf in Resources */,
-				596F1E43244EACD100A59B6E /* Foundation.ttf in Resources */,
-				1899507AAB3A485B96204E6F /* FontAwesome5_Brands.ttf in Resources */,
-				596F1E3E244EACD100A59B6E /* Feather.ttf in Resources */,
-				2CC63423AA174B2A808A2FA8 /* FontAwesome5_Regular.ttf in Resources */,
-				CEEAD4303D264774A8873DFB /* FontAwesome5_Solid.ttf in Resources */,
-				596F1E3D244EACD100A59B6E /* Octicons.ttf in Resources */,
-				596F1E3C244EACD100A59B6E /* Fontisto.ttf in Resources */,
-				5DB3A03E206744AEAAAE9961 /* Fontisto.ttf in Resources */,
-				596F1E49244EACD100A59B6E /* EvilIcons.ttf in Resources */,
-				F8ACA801BBFB44D88A1DFEE5 /* Foundation.ttf in Resources */,
-				63087C1A1E114B40B5F606CF /* Ionicons.ttf in Resources */,
-				596F1E40244EACD100A59B6E /* FontAwesome5_Brands.ttf in Resources */,
-				596F1E45244EACD100A59B6E /* FontAwesome5_Solid.ttf in Resources */,
-				596F1E4A244EACD100A59B6E /* SimpleLineIcons.ttf in Resources */,
-				8C7949AEC2774695B0B39A24 /* MaterialCommunityIcons.ttf in Resources */,
-				596F1E4B244EACD100A59B6E /* MaterialIcons.ttf in Resources */,
-				EE3F63F4D33449B097AD3D37 /* MaterialIcons.ttf in Resources */,
-				9F43ACF06F4243CE9907CE82 /* Octicons.ttf in Resources */,
-				CBDD0815B75E400F9AA678A9 /* SimpleLineIcons.ttf in Resources */,
-				596F1E41244EACD100A59B6E /* MaterialCommunityIcons.ttf in Resources */,
-				B1677421F8234469B84091E8 /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -760,7 +699,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				AF202B252A363F9000DE4933 /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -770,7 +709,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */,
-				2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */,
+				2D02E4BC1E0B4A80006451C7 /* AppDelegate.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -814,14 +753,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 685913796D3AA6F901D2C2BE /* Pods-recipes-recipesTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = recipesTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -837,11 +781,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 90B10218B4A948AC0631E6C8 /* Pods-recipes-recipesTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = recipesTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -866,7 +815,10 @@
 					"FB_SONARKIT_ENABLED=1",
 				);
 				INFOPLIST_FILE = recipes/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -888,7 +840,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = recipes/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -914,7 +869,10 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "recipes-tvOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -924,7 +882,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -941,7 +899,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "recipes-tvOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -951,7 +912,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};
@@ -967,7 +928,11 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "recipes-tvOSTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -977,7 +942,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/recipes-tvOS.app/recipes-tvOS";
-				TVOS_DEPLOYMENT_TARGET = 10.1;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -993,7 +958,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "recipes-tvOSTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1003,7 +972,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/recipes-tvOS.app/recipes-tvOS";
-				TVOS_DEPLOYMENT_TARGET = 10.1;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};
@@ -1030,6 +999,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1055,8 +1025,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(SDKROOT)/usr/lib/swift",
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
@@ -1092,6 +1065,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1110,8 +1084,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(SDKROOT)/usr/lib/swift",
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
