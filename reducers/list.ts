@@ -23,7 +23,7 @@ export const fetchRecipes = createReducer({}, {
     return newState;
   },
   [types.SET_FAVORITE](state: any, action: any) {
-    let recipes = state.recipes.map((recipe: Recipe)=>{
+    let recipes = state.recipes?.map((recipe: Recipe)=>{
       if(recipe.idMeal === action.id) {
         recipe.favorite = !recipe.favorite;
       }
@@ -33,7 +33,7 @@ export const fetchRecipes = createReducer({}, {
     return newState;
   },
   [types.FETCH_FAVORITES](state: any, action: any) {
-    let recipes =  state.recipes.filter((recipe: Recipe)=>{
+    let recipes =  state.recipes?.filter((recipe: Recipe)=>{
       return recipe.favorite == true;
     });
     

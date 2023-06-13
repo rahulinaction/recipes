@@ -1,11 +1,13 @@
 import React,{Component, useState, useEffect} from 'react';
-import {Text, View, StyleSheet, FlatList, AsyncStorage} from 'react-native';
+import {Text, View, StyleSheet, FlatList} from 'react-native';
 import {SearchBar, Button} from 'react-native-elements';
 import {ActionCreators} from '../actions';
 import {bindActionCreators} from 'redux';
 import {Recipe} from '../models/Recipe';
 import { connect } from 'react-redux';
 import RecipeCard from '../components/RecipeCard';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 interface FavoriteProps {
     navigation: any,

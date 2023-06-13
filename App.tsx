@@ -7,77 +7,70 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-
-import {
-  Header,
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
-
-import { createStackNavigator } from 'react-navigation-stack';
-import { createAppContainer, createSwitchNavigator} from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { Provider, connect } from 'react-redux';
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import {createLogger} from 'redux-logger';
-import reducer from './reducers';
+import { StyleSheet, View, Text } from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Provider } from 'react-redux';
 
 //Screens
 import RecipeList from './screens/RecipeList';
 import RecipeDetail from './screens/RecipeDetail';
 import RecipeFavorite from './screens/RecipeFavorite';
-
 import configureStore from './store';
 
 /* Store addition */
-
 const store = configureStore({});
-
 /* Store addition finish */
+const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
+
+const HomeScreen = () => {
+  return (
+    <Stack.Navigator screenOptions={{
+      headerShown: false
+    }}>
+      <Stack.Screen name="List" component={RecipeList} />
+      <Stack.Screen name="Detail" component={RecipeDetail} />
+   </Stack.Navigator>
+  )
+}
+
+const FavoriteScreen = () => {
+  return (
+    <Stack.Navigator screenOptions={{
+      headerShown: false
+    }}>
+      <Stack.Screen name="List" component={RecipeFavorite} />
+      <Stack.Screen name="Detail" component={RecipeDetail} />
+    </Stack.Navigator>  
+  )
+
+}
+
+const AppNavigator = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="listFlow" component={HomeScreen} />
+      <Tab.Screen name="favoriteFlow" component={FavoriteScreen} />
+    </Tab.Navigator>
+  )
+}
+
+
+//Main app component
 const  App = ()=> {
-  
   return (
     <Provider store={store}>
-      <Navigation />
+      <NavigationContainer>
+        <AppNavigator/>
+      </NavigationContainer>
     </Provider>  
   );
 
 }
-
-
-
-const AppNavigator = createBottomTabNavigator({
-  
-    listFlow: createStackNavigator({
-      List: RecipeList,
-      Detail: RecipeDetail
-    }),
-    favoriteFlow: createStackNavigator({
-      Favorite: RecipeFavorite,
-      Detail: RecipeDetail
-    })
-},
-{
-  defaultNavigationOptions: ({ navigation }) => ({
-    
-  }),
-  initialRouteName: 'listFlow'
-}
-
-)
-
-
-let Navigation = createAppContainer(AppNavigator);
-
 
 const styles = StyleSheet.create({
   scrollView: {

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {AsyncStorage} from 'react-native';
 //Harcoding the url for now for axios
 //Implementing request
 

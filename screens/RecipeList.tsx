@@ -1,16 +1,14 @@
 import React,{Component, useState, useEffect} from 'react';
-import {Text, View, StyleSheet, FlatList, AsyncStorage} from 'react-native';
+import {Text, View, StyleSheet, FlatList} from 'react-native';
 import {SearchBar, Button} from 'react-native-elements';
 import {ActionCreators} from '../actions';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
-import {RecipeCategory} from '../models/RecipeCategory'; 
-import {Recipe} from '../models/Recipe';
+import { RecipeCategory } from '../models/RecipeCategory'; 
+import { Recipe } from '../models/Recipe';
 import RNPickerSelect from 'react-native-picker-select';
-
 //Components
 import RecipeCard from '../components/RecipeCard';
-import { throwStatement } from '@babel/types';
 
 interface ListProps {
     fetchCategories: any,
@@ -176,7 +174,6 @@ const pickerStyle = {
 	},
 	placeholderColor: 'white'
 };
-    
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeList);
 

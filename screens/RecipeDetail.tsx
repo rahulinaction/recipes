@@ -11,6 +11,7 @@ interface DetailProps {
    navigation: any,
    fetchRecipe: any,
    recipe: any,
+   route: any,
    isLoading: any,
    setDetailLoading: any,
    setFavorite: any,
@@ -27,7 +28,7 @@ class RecipeDetail extends Component<DetailProps, DetailsState> {
     static navigationOptions = ({ navigation }: { navigation: NavigationScreenProp<NavigationRoute<DetailProps>, DetailProps>}) => ({
         
         headerRight:() => (
-            <Icon name='heart' size={22} iconStyle={{marginRight:"20"}}  color={navigation.getParam("favorite")?"red":"black"}  onPress={() => console.log("Favorite") } />
+            <Icon name='heart' size={22}   color={"black"}  onPress={() => console.log("Favorite") } />
         )
     })
 
@@ -37,8 +38,8 @@ class RecipeDetail extends Component<DetailProps, DetailsState> {
 
 
     componentDidMount() {
-        let {navigation, fetchRecipe} = this.props;
-        let recipeId = navigation.getParam("recipeId");
+        let {navigation, route, fetchRecipe} = this.props;
+        let recipeId = route.params.recipeId;
         //Testing for loader
         fetchRecipe(recipeId);
     }
