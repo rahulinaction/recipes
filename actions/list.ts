@@ -1,22 +1,41 @@
 import * as types from './types';
 import Api from '../lib/api';
-import {RecipeCategory} from '../models/RecipeCategory';
+import { RecipeCategory } from '../models/RecipeCategory';
 import {Recipe} from '../models/Recipe';
+import type { PickerItem } from 'react-native-woodpicker';
+
+
 export function setLoading(flag: any) {
-    return {
-        type: types.SET_LOADING,
-        flag
-    }
+  return {
+    type: types.SET_LOADING,
+    flag
+  }
+}
+
+export function setPickerValue(value: PickerItem) {
+  return {
+    type: types.SET_PICKER,
+    value
+  }
 }
 
 export function fetchCategories() {
 
     let uri = 'categories.php';
-
     return (dispatch: any, getState: any) => {
+
         dispatch(setLoading(true));
-        return Api.get(uri,{}).then(resp => {   
+        return Api.get(uri,{}).then(resp => {  
             let data = resp.data;
+            let categories  = data["categories"];
+            let firstCategory = categories.length > 0 ? categories[0]: null;
+            if(firstCategory) {
+                let categoryName = firstCategory.strCategory;
+                dispatch(fetchRecipes(categoryName));
+                console.log('Picker dispatched');
+                dispatch(setPickerValue({"label": categoryName, "value": categoryName}))
+            }
+
             dispatch(setFetchedCategories(data["categories"]));
         }).catch( (ex: Error) => {
             dispatch(setLoading(false));
@@ -50,22 +69,22 @@ export function fetchRecipes(category: string) {
 
 export function fetchFavorites() {
     return {
-        type: types.FETCH_FAVORITES
+      type: types.FETCH_FAVORITES
     }
 }
 
 
 export function setFetchedRecipes(recipes: Recipe[]) {
     return {
-        type: types.SET_RECIPES,
-        recipes
+      type: types.SET_RECIPES,
+      recipes
     }
 }
 
 export function setFetchedCategories(categories: RecipeCategory[]) {
     return {
-        type: types.SET_CATEGORIES,
-        categories
+      type: types.SET_CATEGORIES,
+      categories
     }
 }
 //Listing categories

@@ -9,9 +9,23 @@ export const setLoading = createReducer({}, {
     },
 });
   
+export const setPickerValue = createReducer({}, {
+  [types.SET_PICKER](state: any, action: any) {
+    let newState = {... state, "pickerValue": action.value };
+    return newState;
+  },
+});
+
 export const fetchCategories = createReducer({}, {
   [types.SET_CATEGORIES](state: any, action: any) {
-    let newState = {... state, "categories": action.categories };
+    let filteredCategories = [];
+    if(typeof action.categories!=="undefined") {
+      for(let i=0;i<action.categories.length;i++) {
+        let category = action.categories[i];
+        filteredCategories.push({"label":category.strCategory, "value": category.strCategory});
+      } 
+    }
+    let newState = {... state, "categories": action.categories, "filteredCategories": filteredCategories };
     return newState;
   },
 });

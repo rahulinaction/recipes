@@ -4,6 +4,7 @@ export const SET_FAVORITE = 'SET_FAVORITE';
 export const SET_CATEGORIES = 'SET_CATEGORIES';
 export const SET_LOADING = 'SET_LOADING';
 export const SET_DETAIL_LOADING = 'SET_LOADING';
+export const SET_PICKER = 'SET_PICKER';
 //Home Page
 
 export const FETCH_RECIPES = 'FETCH_RECIPES';

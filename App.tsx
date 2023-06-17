@@ -29,9 +29,7 @@ const Stack = createStackNavigator();
 
 const HomeScreen = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown: false
-    }}>
+    <Stack.Navigator >
       <Stack.Screen name="List" component={RecipeList} />
       <Stack.Screen name="Detail" component={RecipeDetail} />
    </Stack.Navigator>
@@ -40,9 +38,7 @@ const HomeScreen = () => {
 
 const FavoriteScreen = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown: false
-    }}>
+    <Stack.Navigator>
       <Stack.Screen name="List" component={RecipeFavorite} />
       <Stack.Screen name="Detail" component={RecipeDetail} />
     </Stack.Navigator>  
@@ -52,7 +48,9 @@ const FavoriteScreen = () => {
 
 const AppNavigator = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{
+      headerShown: false
+    }}>
       <Tab.Screen name="listFlow" component={HomeScreen} />
       <Tab.Screen name="favoriteFlow" component={FavoriteScreen} />
     </Tab.Navigator>
