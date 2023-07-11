@@ -12,38 +12,38 @@ const RecipeFull = ({recipe}: Props) => {
     let recipeContent = recipe[0];
     let ingredients = [];
     if(recipeContent) {
-        for(let i=1;i<=20;i++) {
-            let currentIngredient = recipeContent["strIngredient"+i];
-            let currentPortion = recipeContent["strMeasure"+i];
-            if(currentIngredient!=="") {
-                ingredients.push({"ingredient":currentIngredient, "portion":currentPortion}) 
-            }
+      for(let i=1;i<=20;i++) {
+        let currentIngredient = recipeContent["strIngredient"+i];
+        let currentPortion = recipeContent["strMeasure"+i];
+        if(currentIngredient!=="") {
+          ingredients.push({"ingredient":currentIngredient, "portion":currentPortion}) 
         }
+      }
     }
 
     
     return(
-        <ScrollView>
-            <View style={styles.container}> 
-                <Text h3 style={styles.headerText}>{recipeContent.strMeal}</Text>
-                <Image
-                    resizeMode="cover"
-                    style={styles.image}
-                    PlaceholderContent={<ActivityIndicator />}
-                    source={{ uri: recipeContent.strMealThumb }}
-                />
-                <Text style={styles.categoryText}>Category: {recipeContent.strCategory}</Text>
-                <Text style={styles.categoryText}>Area: {recipeContent.strArea}</Text>
-                <Text>{recipeContent.strInstructions}</Text>
-                <Text h4 style={styles.ingredientHeader}>Ingredients</Text>
-                {ingredients.map((ingredient, i) => {
-                    return (
-                        <RecipeIngredient ingredient={ingredient} key={i} />
-                    );
-                })}
-                <AirbnbRating />
-            </View>
-        </ScrollView>    
+      <ScrollView>
+        <View style={styles.container}> 
+          <Text h3 style={styles.headerText}>{recipeContent.strMeal}</Text>
+          <Image
+              resizeMode="cover"
+              style={styles.image}
+              PlaceholderContent={<ActivityIndicator />}
+              source={{ uri: recipeContent.strMealThumb }}
+          />
+          <Text style={styles.categoryText}>Category: {recipeContent.strCategory}</Text>
+          <Text style={styles.categoryText}>Area: {recipeContent.strArea}</Text>
+          <Text>{recipeContent.strInstructions}</Text>
+            <Text h4 style={styles.ingredientHeader}>Ingredients</Text>
+            {ingredients.map((ingredient, i) => {
+                return (
+                    <RecipeIngredient ingredient={ingredient} key={i} />
+                );
+            })}
+            <AirbnbRating />
+        </View>
+      </ScrollView>    
     )
 }
 
