@@ -1,23 +1,25 @@
 import createReducer from '../lib/createReducer';
 import * as types from '../actions/types';
 import {Recipe} from '../models/Recipe';
+import { RootState } from '../store';
+import { IActionRecipeFlag, IActionRecipePicker, IActionRecipes, IActionCategory, IActionRecipeId } from '../types/index';
 
 export const setLoading = createReducer({}, {
-    [types.SET_LOADING](state: any, action: any) {
+    [types.SET_LOADING](state: RootState, action: IActionRecipeFlag) {
       let newState = {... state, "isLoading": action.flag };
       return newState;
     },
 });
   
 export const setPickerValue = createReducer({}, {
-  [types.SET_PICKER](state: any, action: any) {
+  [types.SET_PICKER](state: RootState, action: IActionRecipePicker) {
     let newState = {... state, "pickerValue": action.value };
     return newState;
   },
 });
 
 export const fetchCategories = createReducer({}, {
-  [types.SET_CATEGORIES](state: any, action: any) {
+  [types.SET_CATEGORIES](state: RootState, action: IActionCategory) {
     let filteredCategories = [];
     if(typeof action.categories!=="undefined") {
       for(let i=0;i<action.categories.length;i++) {
@@ -32,11 +34,11 @@ export const fetchCategories = createReducer({}, {
 
 //State for all the list of recipes
 export const fetchRecipes = createReducer({}, {
-  [types.SET_RECIPES](state: any, action: any) {
+  [types.SET_RECIPES](state: RootState, action: IActionRecipes) {
     let newState = {... state, "recipes": action.recipes };
     return newState;
   },
-  [types.SET_FAVORITE](state: any, action: any) {
+  [types.SET_FAVORITE](state: any, action: IActionRecipeId) {
     let recipes = state.recipes?.map((recipe: Recipe)=>{
       if(recipe.idMeal === action.id) {
         recipe.favorite = !recipe.favorite;

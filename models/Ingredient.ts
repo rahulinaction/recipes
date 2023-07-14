@@ -1,5 +1,5 @@
 export interface Ingredient {
-    token: string;
-    id: number;
-    expires_at: number
+  token: string;
+  id: number;
+  expires_at: number
 };
