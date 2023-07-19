@@ -14,7 +14,7 @@ Screenshots
 
 ![Alt text](/screenshots/list.png?raw=true "List Image")
 
-![Alt text](/screenshots/detail.png?raw=true "Detail Image")
+![Alt text](/screenshots/updated_detail.png?raw=true "Detail Image")
 
 
 ![Alt text](/screenshots/grid.png?raw=true "Grid Image")
