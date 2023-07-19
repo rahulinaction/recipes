@@ -4,19 +4,22 @@ import {Text, View, StyleSheet} from 'react-native';
 type IngredientProps = {
 	ingredient: {
 		ingredient: string,
-		portion: string
+		portion: string,
+		ingredientUrl: string
 	}
 };
 
 const RecipeIngredient = ({ingredient}: IngredientProps)  => {
 	return (
     <View style={styles.container}>
-      <View style={styles.component}>
+      
+	  <View style={styles.component}>
         <Text>{ingredient.ingredient}</Text>
       </View>
       <View style={styles.component}>
         <Text>{ingredient.portion}</Text>
       </View>
+
     </View>
 	)
 };

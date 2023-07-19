@@ -17,16 +17,14 @@ type RecipeCardProps = {
 
 const RecipeCard = ({recipe,size,callRecipe, likeRecipe}: RecipeCardProps) => {
     
-let likeColor = "#000";
+  let likeColor = "#000";
 
-
-const RecipeImage = styled(Image).attrs({
-  containerStyle: {
-    width:size==1? 300:150,
-    height: size==1?300:150
-  }
-})``
-
+  const RecipeImage = styled(Image).attrs({
+    containerStyle: {
+      width:size==1? 300:150,
+      height: size==1?300:150
+    }
+  })``
 
   if(recipe.favorite) {
       likeColor = "#FF0000";
@@ -36,7 +34,7 @@ const RecipeImage = styled(Image).attrs({
     < TouchableOpacity onPress={()=>{ callRecipe(recipe) }}>
       <Card title={recipe.strMeal}
           titleStyle={{
-              fontSize: 13
+            fontSize: 13
           }}
           containerStyle ={size==1?styles.listContainer: styles.gridContainer}>
           <View style={styles.container}>
@@ -46,13 +44,13 @@ const RecipeImage = styled(Image).attrs({
               PlaceholderContent={<ActivityIndicator />}
               source={{ uri: recipe.strMealThumb }}
             />
-            <Divider style={{ backgroundColor: 'gray' }} />
+            <StyledDivider />
             <LowerCardContainer>
               <ColumnContainer>
-                <Text>Like:</Text>
+                <Icon name='heart'  size={18} color={likeColor} onPress={() => likeRecipe(recipe.idMeal)} />
               </ColumnContainer>
               <ColumnContainer>
-                <Icon name='heart' size={18} color={likeColor} onPress={() => likeRecipe(recipe.idMeal)} />
+                <Icon name='comment'  style={{"textAlign":"right"}} size={18} color={likeColor} onPress={() => likeRecipe(recipe.idMeal)} />
               </ColumnContainer>
             </LowerCardContainer>    
           </View>
@@ -61,8 +59,17 @@ const RecipeImage = styled(Image).attrs({
   )
 }
 
+const ImageContainer = styled.View`
+flex: 1;
+alignItems:center;
+`
+
 const ColumnContainer = styled.View`
 flex:1
+`
+const DescriptionContainer = styled.View`
+flex:1;
+alignItems:center
 `
 
 const LowerCardContainer = styled.View`
@@ -70,26 +77,29 @@ flex:1;
 flex-direction:row;
 padding: 10px`
 
+const StyledDivider = styled(Divider)`
+background-color: gray
+`
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems:"center"
-    },
-    listImage: {
-      width: 300,
-      height: 300  
-    },
-    gridImage: {
-      width: 150,
-      height: 150
-    },
-    listContainer: {
-      width: 350
-    },
-    gridContainer: {
-      width: 170
-    }
+  container: {
+    flex: 1,
+    alignItems:"center"
+  },
+  listImage: {
+    width: 300,
+    height: 300  
+  },
+  gridImage: {
+    width: 150,
+    height: 150
+  },
+  listContainer: {
+    width: 350
+  },
+  gridContainer: {
+    width: 170
+  }
 });
 
 export default RecipeCard;
