@@ -1,8 +1,8 @@
 # Recipes
 
 A sample react native application which uses the MEALDB API for displaying recipes. 
-The application uses a React/Redux architecture for displaying Recipes and individual recipe description
-
+The application uses a React/Redux architecture for displaying Recipes and individual recipe description.
+The application is moved into a typescript implementation from it's prior javascript implementation
 
 Libraries Used
 1) react-redux
