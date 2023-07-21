@@ -1,5 +1,5 @@
 import React,{Component } from 'react';
-import {Text, View, StyleSheet, FlatList} from 'react-native';
+import {FlatList} from 'react-native';
 import {SearchBar, Button} from 'react-native-elements';
 import {ActionCreators} from '../actions';
 import {bindActionCreators} from 'redux';
@@ -89,12 +89,6 @@ class RecipeList extends Component<ListProps, ListState> {
     render() {
       let { recipes, filteredCategories, pickerValue, isLoading} = this.props;  
       let {search, numColumns} = this.state;
-        
-      if(!recipes) {
-        recipes = []
-      }
-
-
       const data: Array<PickerItem> = filteredCategories;   
 
       return (
@@ -112,8 +106,8 @@ class RecipeList extends Component<ListProps, ListState> {
           <ButtonContainer>
             <ListButton title="List"  onPress={()=>{ this.selectedView("List")}} />
             <Button title="Grid" onPress={()=>{ this.selectedView("Grid")}} />
-          </ButtonContainer>    
-          { isLoading && recipes ?<FlatList  key = {( this.state.numColumns==2 ) ? 1 : 0 } numColumns={numColumns} data={recipes} keyExtractor={(item: Recipe) => item["idMeal"].toString()} renderItem={({item}) => <RecipeCard likeRecipe={this.recipeLiked} callRecipe={this.recipeClicked} size={numColumns}  recipe={item} />} />:  <SkeletonList/>}
+          </ButtonContainer>
+          { isLoading && recipes ?<FlatList  contentContainerStyle={{alignItems:"center"}}  key = {( this.state.numColumns==2 ) ? 1 : 0 } numColumns={numColumns} data={recipes} keyExtractor={(item: Recipe) => item["idMeal"].toString()} renderItem={({item}) => <RecipeCard likeRecipe={this.recipeLiked} callRecipe={this.recipeClicked} size={numColumns}  recipe={item} />} />: <SkeletonList />}
         </Container>    
       )
     }
@@ -136,8 +130,12 @@ const mapDispatchToProps = (dispatch: any) =>{
 
 //Adding styled components
 const Container = styled.View`
-  flex:1
+  flex:1;
 `;
+
+const StyledFlatList = styled.FlatList`
+  marginHorizontal: 10;
+`
 
 const ListButton = styled(Button).attrs({
   containerStyle: {

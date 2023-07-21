@@ -37,6 +37,7 @@ const RecipeCard = ({recipe,size,callRecipe, likeRecipe}: RecipeCardProps) => {
             fontSize: 13
           }}
           containerStyle ={size==1?styles.listContainer: styles.gridContainer}>
+          
           <View style={styles.container}>
             <Image
               resizeMode="cover"
@@ -54,6 +55,7 @@ const RecipeCard = ({recipe,size,callRecipe, likeRecipe}: RecipeCardProps) => {
               </ColumnContainer>
             </LowerCardContainer>    
           </View>
+
       </Card>
     </ TouchableOpacity>
   )
@@ -69,9 +71,8 @@ flex:1
 `
 const DescriptionContainer = styled.View`
 flex:1;
-alignItems:center
+align-items:center;
 `
-
 const LowerCardContainer = styled.View`
 flex:1;
 flex-direction:row;

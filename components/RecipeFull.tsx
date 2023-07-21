@@ -1,18 +1,18 @@
 import React,{Component, useState, useEffect} from 'react';
-import {View,StyleSheet, ActivityIndicator, ScrollView, TouchableOpacity} from 'react-native';
+import {View, ActivityIndicator, ScrollView, TouchableOpacity} from 'react-native';
 import {Image, Text} from 'react-native-elements';
 import {Recipe} from '../models/Recipe';
 import  AppConstants from  '../config/constants';
 import RecipeIngredient from '../components/RecipeIngredient';
+import styled from 'styled-components/native';
 
 type RecipeProps = {
   recipe: any
 };
 
-
 const RecipeFull = ({recipe}: RecipeProps) => {
-
   let recipeContent = recipe[0];
+  const userIngredientsText = 'Used Ingredients';
   let ingredients = [];
   if(recipeContent) {
     for(let i=1;i<=20;i++) {
@@ -25,111 +25,109 @@ const RecipeFull = ({recipe}: RecipeProps) => {
     }
   }
 
-  
   return(  
     <ScrollView nestedScrollEnabled = {true}>
-      <View style={styles.container}> 
-        <Text h3 style={styles.headerText}>{recipeContent.strMeal}</Text>
-        <Image
-            resizeMode="cover"
-            style={styles.image}
-            PlaceholderContent={<ActivityIndicator />}
-            source={{ uri: recipeContent.strMealThumb }}
+      <Container> 
+        <HeaderText h3 >{recipeContent.strMeal}</HeaderText>
+        <LargeImage
+          resizeMode="cover"
+          PlaceholderContent={<ActivityIndicator />}
+          source={{ uri: recipeContent.strMealThumb }}
         />
-        <Text style={styles.categoryText}>Category: {recipeContent.strCategory}</Text>
-        <Text style={styles.categoryText}>Area: {recipeContent.strArea}</Text>
-        <Text style={styles.ingredientHeader}>Used Ingredients</Text>
-        <ScrollView style={styles.ingredientHolder}  horizontal={true}  nestedScrollEnabled = {true} scrollEventThrottle={16}  >  
-          <View  style={styles.ingredientInnerContainer}>
-          {ingredients.map((ingredient)=>{
+        <InfoText key={"Category"} >Category: {recipeContent.strCategory}</InfoText>
+        <InfoText key={"CategoryAnswer"}>Area: {recipeContent.strArea}</InfoText>
+        <IngredientText key={"IngredientsText"}>{userIngredientsText}</IngredientText>
+        <IngredientHolder   horizontal={true}  nestedScrollEnabled = {true} scrollEventThrottle={16}  >  
+          <IngredientInnerContainer>
+          {ingredients.map((_ingredient)=>{
+            const { ingredient, ingredientUrl} = _ingredient;
             return (
               <TouchableOpacity key={ingredient.toString()}  onPress={()=>{
 
               }}>
-              <View  style={styles.imageIngredientContainer} >
-                <Image
-                resizeMode="cover"
-                style={styles.imageThumb}
-                source={{ uri: ingredient.ingredientUrl }}
+              <IngredientItem >
+                <SmallImage
+                  resizeMode="cover"
+                 // style={styles.imageThumb}
+                  source={{ uri: ingredientUrl }}
                />
-              <Text style={styles.ingredientText}>{ingredient.ingredient}</Text>
-             </View>
+              <IngredientText>{ingredient}</IngredientText>
+             </IngredientItem>
              </ TouchableOpacity>
             )
           })}
-          </View>
-        </ScrollView>
-        <Text>{recipeContent.strInstructions}</Text>
-          <Text h4 style={styles.proportionHeader}>Proportions</Text>
+          </IngredientInnerContainer>
+        </IngredientHolder>
+        <StyledText>{recipeContent.strInstructions}</StyledText>
+          <ProportionText h4 >Proportions</ProportionText>
           {ingredients.map((ingredient, i) => {
             return (  
               <>
-                <RecipeIngredient ingredient={ingredient} key={i} />
+                <RecipeIngredient ingredientContent={ingredient} key={i} />
               </>
             );
           })}
 
-      </View>
+      </Container>
     </ScrollView>    
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: 20,
-    alignItems: "center",
-  },
-  image: {
-    width: 350,
-    height: 200,
-    marginBottom: 20
-  },
-  imageThumb: {
-    width: 120,
-    height: 120,
-  },
-  innerContainer: {
-    flex: 1
-  },
-  headerText: {
-    marginBottom: 20
-  },
-  ingredientHeader: {
-    fontSize: 17, 
-    marginTop: 20, 
-    fontWeight:"bold", 
-    marginBottom: 15
-  },
-  categoryText: {
-    color: "blue",
-    fontSize: 15,
-    width:"100%",
-    flex:1,
-    marginBottom: 20
-  },
-  proportionHeader: {
-    fontSize: 17, 
-    marginTop: 20, 
-    fontWeight:"bold", 
-    marginBottom: 15
-  },
-  ingredientText: {
-    fontWeight:"bold",
-    textAlign:"center", 
-    marginTop:10,
-    fontSize:14
-  },
-  imageIngredientContainer: {
-    marginHorizontal: 10
-  },
-  ingredientHolder: {
-    marginBottom: 20
-  },
-  ingredientInnerContainer: {
-    flexDirection:"row", 
-    justifyContent:"center"
-  }
-});
+const StyledText = styled(Text)``;
+
+const HeaderText = styled(StyledText)`
+margin-bottom: 20;
+`
+const InfoText = styled(StyledText)`
+color: blue;
+font-size: 15px;
+width:100%;
+flex:1;
+margin-bottom: 20px;
+`
+const IngredientText = styled(StyledText)`
+font-size: 17px; 
+margin-top: 20px; 
+font-weight:bold;
+margin-bottom: 15px;
+`
+
+const IngredientHolder = styled.ScrollView`
+font-size: 17px; 
+margin-top: 20px; 
+font-weight:bold; 
+margin-bottom: 15px;
+`
+const IngredientInnerContainer = styled.View`
+flex-direction: row; 
+justify-content:center;
+`
+const IngredientItem = styled.View`
+margin-horizontal: 10px;
+`
+const ProportionText = styled(StyledText)`
+font-size: 17px;
+margin-top: 20px; 
+font-weight:bold; 
+margin-bottom: 15px;
+`
+
+const LargeImage = styled(Image)`
+width: 350px;
+height: 200px;
+margin-bottom: 20px;
+`
+
+const SmallImage = styled(Image)`
+width: 120px;
+height: 120px;
+`
+
+const Container = styled.View`
+flex: 1;
+margin: 20px;
+align-items: center;
+`
+
 
 export default RecipeFull;

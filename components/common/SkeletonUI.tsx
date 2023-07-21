@@ -1,6 +1,6 @@
 
 import React, {useEffect, useState} from "react";
-import { View, Text, StyleSheet, Animated } from 'react-native';
+import { View, StyleSheet, Animated } from 'react-native';
 
 //Props for skeleton component
 interface  SkeletonProps {
@@ -18,9 +18,9 @@ const  SkeletonUI  = ({height}: SkeletonProps) => {
   useEffect(()=>{
     Animated.loop(
       Animated.timing(animation, {
-          toValue: 1,
-          duration: 1000,
-          useNativeDriver: true,
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
       })
   ).start();
   },[]);
@@ -32,13 +32,8 @@ const  SkeletonUI  = ({height}: SkeletonProps) => {
   )
 }
 
+
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    backgroundColor: '#fff',
-  },
   skeleton: {
     backgroundColor: '#f2f2f2',
     borderRadius: 5,

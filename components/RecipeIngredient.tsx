@@ -1,38 +1,45 @@
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text} from 'react-native';
+import styled from 'styled-components/native';
 
 type IngredientProps = {
-	ingredient: {
+	ingredientContent: {
 		ingredient: string,
 		portion: string,
 		ingredientUrl: string
 	}
 };
 
-const RecipeIngredient = ({ingredient}: IngredientProps)  => {
-	return (
-    <View style={styles.container}>
-      
-	  <View style={styles.component}>
-        <Text>{ingredient.ingredient}</Text>
-      </View>
-      <View style={styles.component}>
-        <Text>{ingredient.portion}</Text>
-      </View>
+const RecipeIngredient = ({ingredientContent}: IngredientProps)  => {
 
-    </View>
+  const {ingredient, portion} = ingredientContent;
+
+	return (
+    <Container>
+      <Component>
+        <LeftText>{ingredient}</LeftText>
+      </Component>
+      <Component>
+        <RightText>{portion}</RightText>
+      </Component>
+    </Container>
 	)
 };
 
-const styles = StyleSheet.create({
-	container: {
-    flex: 1,
-    flexDirection: "row"
-	},
-	component: {
-		flex: 1,
-		height: 30
-	}
-});
+//Styling
+const Component = styled.View`
+flex: 1;
+height: 30px;
+`
+const LeftText = styled.Text`
+  text-align: left;
+`
+const RightText = styled.Text` 
+  text-align: right;`
+
+const Container =styled.View`
+flex: 1;
+flex-direction: row;
+`
 
 export default RecipeIngredient;
