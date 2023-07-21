@@ -4,7 +4,7 @@ import { RecipeCategory } from '../models/RecipeCategory';
 import {Recipe} from '../models/Recipe';
 import type { PickerItem } from 'react-native-woodpicker';
 import { AppDispatch, RootState} from '../store/';
-
+import { delay } from '../lib/utils';
 export const setLoading = (flag: boolean) => {
   return {
     type: types.SET_LOADING,
@@ -22,8 +22,9 @@ export const setPickerValue = (value: PickerItem) =>{
 export const fetchRecipes = (category: string) => {
 
   let uri = 'filter.php?c='+category;
-  return (dispatch: any,  getState: ()=> RootState) => {
-    dispatch(setLoading(true));
+  return async (dispatch: any,  getState: ()=> RootState) => {
+    dispatch(setLoading(false));
+    await delay(500); //Added to show a loading mechanism
     return Api.get(uri,{}).then(resp => {   
       let data = resp.data;
       //Sanitize and add flag here
@@ -32,6 +33,7 @@ export const fetchRecipes = (category: string) => {
       for(let meal of meals) {
         meal["favorite"] = false;
       }
+      dispatch(setLoading(true));
       dispatch(setFetchedRecipes(meals));
     }).catch( (ex: Error) => {
       dispatch(setLoading(false));

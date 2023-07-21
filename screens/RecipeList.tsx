@@ -1,4 +1,4 @@
-import React,{Component, useState, useEffect} from 'react';
+import React,{Component } from 'react';
 import {Text, View, StyleSheet, FlatList} from 'react-native';
 import {SearchBar, Button} from 'react-native-elements';
 import {ActionCreators} from '../actions';
@@ -12,6 +12,7 @@ import {NavigationProp, ParamListBase} from '@react-navigation/native';
 import styled from 'styled-components/native';
 //Components
 import RecipeCard from '../components/RecipeCard';
+import SkeletonList from '../components/common/SkeletonList';
 
 interface ListProps {
   fetchCategories: ()=>void,
@@ -23,7 +24,8 @@ interface ListProps {
   setPickerValue: (_value: PickerItem)=>void,
   navigation: NavigationProp<ParamListBase>,
   init: boolean,
-  setFavorite: (_id: number)=>void 
+  setFavorite: (_id: number)=>void,
+  isLoading: boolean 
 };
 
 interface ListState {
@@ -42,7 +44,7 @@ class RecipeList extends Component<ListProps, ListState> {
     // Before the component mounts, we initialise our state
     constructor(props: ListProps) {
       super(props);
-      this.state = {isLoading:"",categories:[], recipes: [], search: "",numColumns:1, init: true, filteredCategories: []};
+      this.state = {isLoading: false,categories:[], recipes: [], search: "", numColumns:1, init: true, filteredCategories: []};
       this.recipeClicked = this.recipeClicked.bind(this);
       this.recipeLiked =  this.recipeLiked.bind(this);
       this.categorySelected = this.categorySelected.bind(this);
@@ -85,12 +87,13 @@ class RecipeList extends Component<ListProps, ListState> {
 
     // render will know everything!
     render() {
-      let { recipes, filteredCategories, pickerValue} = this.props;  
+      let { recipes, filteredCategories, pickerValue, isLoading} = this.props;  
       let {search, numColumns} = this.state;
-
+        
       if(!recipes) {
-          recipes = []
+        recipes = []
       }
+
 
       const data: Array<PickerItem> = filteredCategories;   
 
@@ -110,7 +113,7 @@ class RecipeList extends Component<ListProps, ListState> {
             <ListButton title="List"  onPress={()=>{ this.selectedView("List")}} />
             <Button title="Grid" onPress={()=>{ this.selectedView("Grid")}} />
           </ButtonContainer>    
-          {recipes ?<FlatList  key = {( this.state.numColumns==2 ) ? 1 : 0 } numColumns={numColumns} data={recipes} keyExtractor={(item: Recipe) => item["idMeal"].toString()} renderItem={({item}) => <RecipeCard likeRecipe={this.recipeLiked} callRecipe={this.recipeClicked} size={numColumns}  recipe={item} />} />:  null}
+          { isLoading && recipes ?<FlatList  key = {( this.state.numColumns==2 ) ? 1 : 0 } numColumns={numColumns} data={recipes} keyExtractor={(item: Recipe) => item["idMeal"].toString()} renderItem={({item}) => <RecipeCard likeRecipe={this.recipeLiked} callRecipe={this.recipeClicked} size={numColumns}  recipe={item} />} />:  <SkeletonList/>}
         </Container>    
       )
     }
@@ -143,19 +146,18 @@ const ListButton = styled(Button).attrs({
 })``
 
 const ButtonContainer = styled.View`
-paddingHorizontal: 20`;
+padding-horizontal: 20px`;
 
 
 const SelectContainer = styled.View`
-marginTop: 40;
-height: 50;
-marginBottom: 40;
-marginHorizontal: 20;
-paddingHorizontal: 10;
-paddingVertical: 10;
-borderColor:"red";
-borderWidth:1;
-borderRadius: 4;
+margin-top: 40px;
+height: 50px;
+margin-bottom: 40px;
+margin-horizontal: 20px;
+padding: 10px;
+border-color:red;
+border-width:1px;
+border-radius: 4px;
 `;
  
 

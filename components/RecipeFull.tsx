@@ -40,10 +40,10 @@ const RecipeFull = ({recipe}: RecipeProps) => {
         <Text style={styles.categoryText}>Area: {recipeContent.strArea}</Text>
         <Text style={styles.ingredientHeader}>Used Ingredients</Text>
         <ScrollView style={styles.ingredientHolder}  horizontal={true}  nestedScrollEnabled = {true} scrollEventThrottle={16}  >  
-          <View style={styles.ingredientInnerContainer}>
+          <View  style={styles.ingredientInnerContainer}>
           {ingredients.map((ingredient)=>{
             return (
-              <TouchableOpacity  onPress={()=>{
+              <TouchableOpacity key={ingredient.toString()}  onPress={()=>{
 
               }}>
               <View  style={styles.imageIngredientContainer} >
