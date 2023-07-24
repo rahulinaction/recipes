@@ -19,4 +19,6 @@ Screenshots
 
 ![Alt text](/screenshots/grid.png?raw=true "Grid Image")
 
-![Alt text](/screenshots/RecipeList.mp4?raw=true "Grid Image")
+
+https://github.com/rahulinaction/recipes/assets/4466727/81af8544-f5e5-4664-8978-6379502d60e5
+
