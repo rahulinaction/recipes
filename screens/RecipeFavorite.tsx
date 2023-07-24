@@ -1,5 +1,5 @@
 import React,{Component, useState, useEffect} from 'react';
-import {Text, View, StyleSheet, FlatList} from 'react-native';
+import {Text, View, FlatList} from 'react-native';
 import {SearchBar, Button} from 'react-native-elements';
 import {ActionCreators} from '../actions';
 import {bindActionCreators} from 'redux';
@@ -70,20 +70,6 @@ class RecipeFavorite extends Component<FavoriteProps, FavoriteState> {
 const Container = styled.View`
 flex:1
 `
-
-
-const styles  = StyleSheet.create({
-    container:{
-      flex: 1
-    },
-    selectContainer : {
-      marginTop: 40,
-      marginBottom: 40,
-      paddingHorizontal: 10,
-      paddingVertical: 10,
-      borderColor:"red"
-    }
-});
 
 
 const mapStateToProps = (state: any) => {
