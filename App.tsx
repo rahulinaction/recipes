@@ -11,6 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Provider } from 'react-redux';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 //Screens
 import RecipeList from './screens/RecipeList';
@@ -49,8 +50,8 @@ const AppNavigator = () => {
     <Tab.Navigator screenOptions={{
       headerShown: false
     }}>
-      <Tab.Screen name="listFlow" component={HomeScreen} />
-      <Tab.Screen name="favoriteFlow" component={FavoriteScreen} />
+      <Tab.Screen name="ItemList" component={HomeScreen} options = {{ tabBarLabel:"List", tabBarIcon: ({ color, size }) => <Icon name='list' color={color}  size={18}  /> }} />
+      <Tab.Screen name="Favorites" component={FavoriteScreen}  options = {{ tabBarLabel:"Favorites", tabBarIcon: ({ color, size }) => <Icon name='heart' color={color}  size={18}  /> }} />
     </Tab.Navigator>
   )
 }
