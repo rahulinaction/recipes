@@ -1,10 +1,11 @@
-import React,{Component, useState, useEffect} from 'react';
-import {View, ActivityIndicator, ScrollView, TouchableOpacity} from 'react-native';
+import React, { useState, useCallback} from 'react';
+import {View, ActivityIndicator, ScrollView, TouchableOpacity, Alert} from 'react-native';
 import {Image, Text} from 'react-native-elements';
 import {Recipe} from '../models/Recipe';
 import  AppConstants from  '../config/constants';
 import RecipeIngredient from '../components/RecipeIngredient';
 import styled from 'styled-components/native';
+import YoutubePlayer from "react-native-youtube-iframe";
 
 type RecipeProps = {
   recipe: any
@@ -12,6 +13,8 @@ type RecipeProps = {
 
 const RecipeFull = ({recipe}: RecipeProps) => {
   let recipeContent = recipe[0];
+  const [playing, setPlaying] = useState(false);
+  let youtubeId = recipeContent?.strYoutube? recipeContent?.strYoutube.split("=")[1] : null;
   const userIngredientsText = 'Used Ingredients';
   let ingredients = [];
   if(recipeContent) {
@@ -25,6 +28,18 @@ const RecipeFull = ({recipe}: RecipeProps) => {
     }
   }
 
+  //The below 2 methods are used to handle video playing youtube component
+  const onStateChange = useCallback((state) => {
+    if (state === "ended") {
+      setPlaying(false);
+      Alert.alert("video has finished playing!");
+    }
+  }, []);
+  
+  const togglePlaying = useCallback(() => {
+    setPlaying((prev) => !prev);
+  }, []);
+
   return(  
     <ScrollView nestedScrollEnabled = {true}>
       <Container> 
@@ -37,33 +52,39 @@ const RecipeFull = ({recipe}: RecipeProps) => {
         <InfoText key={"Category"} >Category: {recipeContent.strCategory}</InfoText>
         <InfoText key={"CategoryAnswer"}>Area: {recipeContent.strArea}</InfoText>
         <IngredientText key={"IngredientsText"}>{userIngredientsText}</IngredientText>
-        <IngredientHolder   horizontal={true}  nestedScrollEnabled = {true} scrollEventThrottle={16}  >  
+        <IngredientHolder key={"IngredientHolder"}  horizontal={true}  nestedScrollEnabled = {true} scrollEventThrottle={16}  >  
           <IngredientInnerContainer>
-          {ingredients.map((_ingredient)=>{
+          {ingredients.map((_ingredient, index)=>{
             const { ingredient, ingredientUrl} = _ingredient;
             return (
-              <TouchableOpacity key={ingredient.toString()}  onPress={()=>{
-
-              }}>
-              <IngredientItem >
-                <SmallImage
-                  resizeMode="cover"
-                 // style={styles.imageThumb}
-                  source={{ uri: ingredientUrl }}
-               />
-              <IngredientText>{ingredient}</IngredientText>
-             </IngredientItem>
+              <TouchableOpacity key={ingredient?.toString()+"_"+index} >
+                <IngredientItem key={ingredient?.toString()+"_item_"+index} >
+                  <SmallImage
+                    resizeMode="cover"
+                    source={{ uri: ingredientUrl }}
+                />
+                <IngredientText>{ingredient}</IngredientText>
+              </IngredientItem>
              </ TouchableOpacity>
             )
           })}
           </IngredientInnerContainer>
         </IngredientHolder>
+        {youtubeId ?
+        <YTContainer>
+        <YoutubePlayer
+          height={300}
+          style={{ width:"100%"}}
+          play={playing}
+          videoId={youtubeId}
+          onChangeState={onStateChange}
+        /></YTContainer>: null}
         <StyledText>{recipeContent.strInstructions}</StyledText>
           <ProportionText h4 >Proportions</ProportionText>
-          {ingredients.map((ingredient, i) => {
+          {ingredients.map((ingredient, i: number) => {
             return (  
               <>
-                <RecipeIngredient ingredientContent={ingredient} key={i} />
+                <RecipeIngredient ingredientContent={ingredient} key={"Proportion_"+ingredient?.ingredient} />
               </>
             );
           })}
@@ -76,7 +97,7 @@ const RecipeFull = ({recipe}: RecipeProps) => {
 const StyledText = styled(Text)``;
 
 const HeaderText = styled(StyledText)`
-margin-bottom: 20;
+margin-bottom: 20px;
 `
 const InfoText = styled(StyledText)`
 color: blue;
@@ -127,6 +148,9 @@ const Container = styled.View`
 flex: 1;
 margin: 20px;
 align-items: center;
+`
+const YTContainer = styled.View`
+width: 100%;
 `
 
 

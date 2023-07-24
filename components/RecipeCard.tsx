@@ -1,6 +1,6 @@
 import React,{Component, useState, useEffect, useMemo} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-import {Card, Image, Divider} from 'react-native-elements';
+import { View, StyleSheet, TouchableOpacity} from 'react-native';
+import {Card, Image, Text, Divider} from 'react-native-elements';
 import {Recipe } from '../models/Recipe';
 import { ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -29,10 +29,15 @@ const RecipeCard = ({recipe,size,callRecipe, likeRecipe}: RecipeCardProps) => {
   if(recipe.favorite) {
       likeColor = "#FF0000";
   }
+  /**
+   * 
+   * 
+   * 
+   */
 
   return(
-    < TouchableOpacity onPress={()=>{ callRecipe(recipe) }}>
-      <Card title={recipe.strMeal}
+    < TouchableOpacity  onPress={()=>{ callRecipe(recipe) }}>
+      <StyledCard title={recipe.strMeal}
           titleStyle={{
             fontSize: 13
           }}
@@ -45,29 +50,30 @@ const RecipeCard = ({recipe,size,callRecipe, likeRecipe}: RecipeCardProps) => {
               PlaceholderContent={<ActivityIndicator />}
               source={{ uri: recipe.strMealThumb }}
             />
-            <StyledDivider />
+            <RecipeText numberOfLines={1} h5>{recipe.strMeal}</RecipeText>
+            <StyledDivider/>
             <LowerCardContainer>
               <ColumnContainer>
                 <Icon name='heart'  size={18} color={likeColor} onPress={() => likeRecipe(recipe.idMeal)} />
               </ColumnContainer>
               <ColumnContainer>
-                <Icon name='comment'  style={{"textAlign":"right"}} size={18} color={likeColor} onPress={() => likeRecipe(recipe.idMeal)} />
               </ColumnContainer>
             </LowerCardContainer>    
           </View>
 
-      </Card>
+      </StyledCard>
     </ TouchableOpacity>
   )
 }
 
 const ImageContainer = styled.View`
 flex: 1;
+margin-bottom: 20px;
 alignItems:center;
 `
 
 const ColumnContainer = styled.View`
-flex:1
+flex:1;
 `
 const DescriptionContainer = styled.View`
 flex:1;
@@ -76,10 +82,19 @@ align-items:center;
 const LowerCardContainer = styled.View`
 flex:1;
 flex-direction:row;
-padding: 10px`
+padding: 10px;`
 
 const StyledDivider = styled(Divider)`
-background-color: gray
+height:1px;
+width:100%;
+`
+const RecipeText = styled(Text)`
+font-size: 16px;
+font-weight:bold;
+margin: 20px;
+`
+const StyledCard = styled(Card)`
+
 `
 
 const styles = StyleSheet.create({
@@ -96,10 +111,12 @@ const styles = StyleSheet.create({
     height: 150
   },
   listContainer: {
-    width: 350
+    width: 350,
+    paddingHorizontal: 0
   },
   gridContainer: {
-    width: 170
+    width: 170,
+    paddingHorizontal: 0
   }
 });
 
