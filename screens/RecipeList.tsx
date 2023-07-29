@@ -10,12 +10,14 @@ import type { PickerItem } from 'react-native-woodpicker';
 import { Picker } from 'react-native-woodpicker';
 import {NavigationProp, ParamListBase} from '@react-navigation/native';
 import styled from 'styled-components/native';
+import { realmConfig } from '../schema/realm';
 //Components
 import RecipeCard from '../components/RecipeCard';
 import SkeletonList from '../components/common/SkeletonList';
 
 interface ListProps {
   fetchCategories: ()=>void,
+  fetchFavorites: ()=>void,
   categories: RecipeCategory[],
   filteredCategories:  Array<PickerItem>,
   recipes: Recipe[],
@@ -24,7 +26,7 @@ interface ListProps {
   setPickerValue: (_value: PickerItem)=>void,
   navigation: NavigationProp<ParamListBase>,
   init: boolean,
-  setFavorite: (_id: number)=>void,
+  setFavorite: (recipe: Recipe)=>void,
   isLoading: boolean 
 };
 
@@ -56,11 +58,12 @@ class RecipeList extends Component<ListProps, ListState> {
 //Fetching value from picker
     categorySelected(value: PickerItem) {
       this.props.setPickerValue(value);
-      this.props.fetchRecipes(value.value);
+      //this.props.fetchRecipes(value.value);
     }
 
     componentDidMount() {
       this.props.fetchCategories();
+      this.props.fetchFavorites();
     }
 
     selectedView(value: string) {
@@ -81,8 +84,8 @@ class RecipeList extends Component<ListProps, ListState> {
       });
     }
 
-    recipeLiked(id:  number) {
-      this.props.setFavorite(id);
+    recipeLiked (recipeItem:  Recipe) {
+      this.props.setFavorite(recipeItem);
     }
 
     // render will know everything!

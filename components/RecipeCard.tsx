@@ -11,7 +11,7 @@ type RecipeCardProps = {
   recipe: Recipe,
   callRecipe: (_recipe: Recipe)=> void,
   size: number,
-  likeRecipe: (_id: number)=> void
+  likeRecipe: (_id: Recipe)=> void
 };
 
 
@@ -54,7 +54,7 @@ const RecipeCard = ({recipe,size,callRecipe, likeRecipe}: RecipeCardProps) => {
             <StyledDivider/>
             <LowerCardContainer>
               <ColumnContainer>
-                <Icon name='heart'  size={18} color={likeColor} onPress={() => likeRecipe(recipe.idMeal)} />
+                <Icon name='heart'  size={18} color={likeColor} onPress={() => likeRecipe(recipe)} />
               </ColumnContainer>
               <ColumnContainer>
               </ColumnContainer>
@@ -74,6 +74,7 @@ alignItems:center;
 
 const ColumnContainer = styled.View`
 flex:1;
+
 `
 const DescriptionContainer = styled.View`
 flex:1;

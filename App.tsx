@@ -12,7 +12,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Provider } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import {RootStackParamList} from './RootStackParams';
+import { realmContext} from './schema/realm';
 //Screens
 import RecipeList from './screens/RecipeList';
 import RecipeDetail from './screens/RecipeDetail';
@@ -23,7 +24,7 @@ import store from './store';
 
 /* Store addition finish */
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 
 
 const HomeScreen = () => {
@@ -59,11 +60,15 @@ const AppNavigator = () => {
 
 //Main app component
 const  App = ()=> {
+  const {RealmProvider} = realmContext;
+   
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <AppNavigator/>
-      </NavigationContainer>
+      <RealmProvider>
+        <NavigationContainer>
+          <AppNavigator/>
+        </NavigationContainer>
+      </RealmProvider>
     </Provider>  
   );
 }
