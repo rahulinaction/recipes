@@ -3,6 +3,7 @@ import Api from '../lib/api';
 import { RecipeCategory } from '../models/RecipeCategory';
 import { Recipe } from '../models/Recipe';
 import { AppDispatch, RootState } from '../store/';
+import { realmContext}  from '../schema/realm';
 import { DetailDispatch, DispatchLoadingFlag, DispatchRecipes, DispatchRecipe } from '../types';
 export const setDetailLoading = (flag: boolean) => {
   return {
@@ -10,6 +11,9 @@ export const setDetailLoading = (flag: boolean) => {
     flag
   }
 }
+
+const { useRealm } = realmContext;
+
 
 export const fetchRecipe = (id: number) => {
 
@@ -29,13 +33,6 @@ export const fetchRecipe = (id: number) => {
 export const setRecipe = (recipe: Recipe) => {
   return {
     type: types.SET_RECIPE,
-    recipe
-  }
-}
-
-export const setFavorite = (recipe: Recipe) => {
-  return {
-    type: types.SET_FAVORITE,
     recipe
   }
 }

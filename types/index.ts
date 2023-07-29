@@ -12,6 +12,10 @@ export interface IActionRecipeDetail extends IActionType {
   recipe?: Recipe
 }
 
+export interface IActionRecipeLite extends IActionType {
+  recipe: Recipe
+}
+
 export interface IActionRecipePicker extends IActionType {
   value: string
 }

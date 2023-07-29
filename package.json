@@ -26,11 +26,12 @@
     "@types/styled-components-react-native": "^5.2.1",
     "add": "^2.0.6",
     "axios": "^0.21.2",
+    "eslint-plugin-flowtype-errors": "^4.5.0",
     "react": "18.2.0",
     "react-native": "0.71.7",
     "react-native-elements": "^3.4.3",
     "react-native-gesture-handler": "^2.10.0",
-    "react-native-reanimated": "2.15.0",
+    "react-native-reanimated": "^2.15.0",
     "react-native-safe-area-context": "^4.5.3",
     "react-native-screens": "3.20.0",
     "react-native-swiper": "^1.6.0",
@@ -64,9 +65,12 @@
     "@storybook/addons": "^7.0.18",
     "@storybook/core-common": "^7.0.18",
     "@storybook/react-native": "^6.5.3",
+    "@types/jest": "^29.5.3",
     "@types/react": "^16.9.34",
     "@types/react-native": "^0.62.2",
     "@types/react-test-renderer": "^18.0.0",
+    "@types/storybook__react": "^5.2.1",
+    "@typescript-eslint/eslint-plugin": "^6.2.0",
     "babel-jest": "^25.3.0",
     "babel-loader": "^8.2.5",
     "eslint": "^8.45.0",
@@ -79,7 +83,15 @@
     "typescript": "^3.8.3"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   },
   "resolutions": {
     "styled-components": "^5"
