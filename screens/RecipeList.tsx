@@ -58,7 +58,7 @@ class RecipeList extends Component<ListProps, ListState> {
 //Fetching value from picker
     categorySelected(value: PickerItem) {
       this.props.setPickerValue(value);
-      //this.props.fetchRecipes(value.value);
+      this.props.fetchRecipes(value.value);
     }
 
     componentDidMount() {
