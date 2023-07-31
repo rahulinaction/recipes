@@ -299,12 +299,8 @@ PODS:
     - glog
   - react-native-netinfo (5.7.1):
     - React
-  - react-native-safe-area-context (4.5.3):
-    - RCT-Folly
-    - RCTRequired
-    - RCTTypeSafety
+  - react-native-safe-area-context (4.7.1):
     - React-Core
-    - ReactCommon/turbomodule/core
   - react-native-slider (4.4.2):
     - React-Core
   - react-native-webview (13.3.0):
@@ -656,7 +652,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 9885f6f94d231b95a739ef7bb50536fb87ce7539
   React-logger: 3f8ebad1be1bf3299d1ab6d7f971802d7395c7ef
   react-native-netinfo: 4fa023c153d582aeae8435df95c9a975c5986449
-  react-native-safe-area-context: b8979f5eda6ed5903d4dbc885be3846ea3daa753
+  react-native-safe-area-context: 9697629f7b2cda43cf52169bb7e0767d330648c2
   react-native-slider: 33b8d190b59d4f67a541061bb91775d53d617d9d
   react-native-webview: 8a4f68a75fc7efaedfdeba6d5aa2db4a4f74f281
   React-perflogger: 2d505bbe298e3b7bacdd9e542b15535be07220f6
