@@ -25,7 +25,7 @@ export const fetchRecipe = (id: number) => {
       //dispatch(setDetailLoading(false));
       dispatch(setRecipe(data["meals"]));
     }).catch( (ex: Error) => {
-    dispatch(setDetailLoading(false));
+      dispatch(setDetailLoading(false));
     });
   }
 }    

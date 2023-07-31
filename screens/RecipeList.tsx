@@ -1,6 +1,6 @@
-import React,{Component } from 'react';
+import React,{Component, useEffect, useState } from 'react';
 import {FlatList} from 'react-native';
-import {SearchBar, Button} from 'react-native-elements';
+import {Button} from 'react-native-elements';
 import {ActionCreators} from '../actions';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
@@ -11,6 +11,8 @@ import { Picker } from 'react-native-woodpicker';
 import {NavigationProp, ParamListBase} from '@react-navigation/native';
 import styled from 'styled-components/native';
 import { realmConfig } from '../schema/realm';
+import { useDispatch, useSelector} from "react-redux";
+
 //Components
 import RecipeCard from '../components/RecipeCard';
 import SkeletonList from '../components/common/SkeletonList';
@@ -42,80 +44,60 @@ interface ListState {
 
 const gridValue = 'Grid';
 
-class RecipeList extends Component<ListProps, ListState> {
-    // Before the component mounts, we initialise our state
-    constructor(props: ListProps) {
-      super(props);
-      this.state = {isLoading: false,categories:[], recipes: [], search: "", numColumns:1, init: true, filteredCategories: []};
-      this.recipeClicked = this.recipeClicked.bind(this);
-      this.recipeLiked =  this.recipeLiked.bind(this);
-      this.categorySelected = this.categorySelected.bind(this);
-    }
-/*
-    updateSearch(search: string){
-        this.setState({ search });
-    };*/
-//Fetching value from picker
-    categorySelected(value: PickerItem) {
-      this.props.setPickerValue(value);
-      this.props.fetchRecipes(value.value);
-    }
 
-    componentDidMount() {
-      this.props.fetchCategories();
-      this.props.fetchFavorites();
-    }
+const RecipeList = (props: ListProps) => {
+  const [ numColumns, setNumColumns] = useState<number>(1);
+ // const [ recipes, setRecipes] = useState<Recipe[]>([]);
+  const [ hasLoaded, setHasLoaded] = useState<boolean>(false);
 
-    selectedView(value: string) {
-      let numColumns = 1;
-      if(value===gridValue) {
-        numColumns = 2;
-      }
-      this.setState({
-        numColumns: numColumns
-      });
-    }
+  let { recipes, filteredCategories, pickerValue, isLoading} = props;  
+   //   let {search, numColumns} = this.state;
+  const data: Array<PickerItem> = filteredCategories;   
 
-    recipeClicked(recipe: Recipe) {
-      let {navigation} = this.props;
-      navigation.navigate('Detail', {
-        recipeId: recipe.idMeal,
-        favorite: recipe.favorite
-      });
-    }
+  useEffect(()=>{
+    props?.fetchCategories();
+    props?.fetchFavorites();
+  },[]);
 
-    recipeLiked (recipeItem:  Recipe) {
-      this.props.setFavorite(recipeItem);
-    }
+  const recipeClicked = (recipe: Recipe) => {
+    let {navigation} = props;
+    navigation?.navigate('Detail', {
+      recipeId: recipe.idMeal,
+      favorite: recipe.favorite
+    });
+  }
 
-    // render will know everything!
-    render() {
-      let { recipes, filteredCategories, pickerValue, isLoading} = this.props;  
-      let {search, numColumns} = this.state;
-      const data: Array<PickerItem> = filteredCategories;   
+  const recipeLiked = (recipeItem:  Recipe) => {
+    props.setFavorite(recipeItem);
+  }
 
-      return (
-        <Container>
-          <SelectContainer>
-            <Picker
-              item={pickerValue}
-              items={data}
-              onItemChange={this.categorySelected}
-              title="Categories"
-              placeholder="Select Categories"
-              isNullable={false}
-            />
-          </SelectContainer>                
-          <ButtonContainer>
-            <ListButton title="List"  onPress={()=>{ this.selectedView("List")}} />
-            <Button title="Grid" onPress={()=>{ this.selectedView("Grid")}} />
-          </ButtonContainer>
-          { isLoading && recipes ?<FlatList  contentContainerStyle={{alignItems:"center"}}  key = {( this.state.numColumns==2 ) ? 1 : 0 } numColumns={numColumns} data={recipes} keyExtractor={(item: Recipe) => item["idMeal"].toString()} renderItem={({item}) => <RecipeCard likeRecipe={this.recipeLiked} callRecipe={this.recipeClicked} size={numColumns}  recipe={item} />} />: <SkeletonList />}
-        </Container>    
-      )
-    }
+  const categorySelected = (value: PickerItem) =>{
+    props.setPickerValue(value);
+    props.fetchRecipes(value.value);
+  }
+
+  return (
+    <Container>
+    <SelectContainer>
+      <Picker
+        item={pickerValue}
+        items={data}
+        onItemChange={(pickedItem)=>{ categorySelected(pickedItem)}}
+        title="Categories"
+        placeholder="Select Categories"
+        isNullable={false}
+      />
+    </SelectContainer>                
+    <ButtonContainer>
+      <ListButton title="List"  onPress={()=>{ setNumColumns(1)}} />
+      <Button title="Grid" onPress={()=>{ setNumColumns(2)}} />
+    </ButtonContainer>
+    { isLoading && recipes ?<FlatList  contentContainerStyle={{alignItems:"center"}}  key = {( numColumns==2 ) ? 1 : 0 } numColumns={numColumns} data={recipes} keyExtractor={(item: Recipe) => item["idMeal"].toString()} renderItem={({item}) => <RecipeCard likeRecipe={()=>{recipeLiked(item)}} callRecipe= {()=>{recipeClicked(item)}} size={numColumns}  recipe={item} />} />: <SkeletonList />}
+  </Container>    
+  )
 }
 
+//@todo move in selectors redux toolkit
 const  mapStateToProps =(state: any) => {
   const { isLoading } = state.setLoading;
   const {categories, filteredCategories} = state.fetchCategories;
