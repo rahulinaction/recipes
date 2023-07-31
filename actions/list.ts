@@ -95,9 +95,9 @@ export const  fetchCategories = () => {
   return (dispatch: any,  getState: ()=> RootState) => {
     dispatch(setLoading(true));
     return Api.get(uri,{}).then(resp => {
-      let data = resp.data;
-      let categories  = data["categories"];
-      let firstCategory = categories.length > 0 ? categories[0]: null;
+      const data = resp.data;
+      const categories  = data["categories"];
+      const firstCategory = categories.length > 0 ? categories[0]: null;
       if(firstCategory) {
         let categoryName = firstCategory.strCategory;
         dispatch(fetchRecipes(categoryName));
