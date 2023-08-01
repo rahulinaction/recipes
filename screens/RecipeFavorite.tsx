@@ -1,4 +1,4 @@
-import React,{Component, useState, useEffect} from 'react';
+import React,{ useState, useEffect} from 'react';
 import {Text, View, FlatList} from 'react-native';
 import {SearchBar, Button} from 'react-native-elements';
 import {ActionCreators} from '../actions';
@@ -6,76 +6,75 @@ import {bindActionCreators} from 'redux';
 import {Recipe} from '../models/Recipe';
 import { connect } from 'react-redux';
 import RecipeCard from '../components/RecipeCard';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {NavigationProp, ParamListBase} from '@react-navigation/native';
 import styled from 'styled-components/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
+import SkeletonList from '../components/common/SkeletonList';
 
-interface FavoriteProps {
+interface RecipeProps {
   navigation: NavigationProp<ParamListBase>,
-  recipes: any,
-  setFavorite: (_id:number)=>void,
-  fetchFavorites: ()=>void
+  favorites: Recipe[],
+  setFavorite: (recipe:Recipe)=>void,
+  fetchFavorites: ()=>void,
+  isLoading: boolean
  };
  
- interface FavoriteState {
+ interface RecipeState {
   isLoading: boolean,
   recipes: Recipe[]
  };
  
-class RecipeFavorite extends Component<FavoriteProps, FavoriteState> {
-    
-  constructor(props: FavoriteProps) {
-    super(props);
-    this.recipeClicked = this.recipeClicked.bind(this);
-    this.recipeLiked =  this.recipeLiked.bind(this);
-    this.onScreenFocus = this.onScreenFocus.bind(this);
-    this.state = {isLoading: false, recipes: []};
-  }
+const RecipeFavorite = (props: RecipeProps) => {
+  const navigation = useNavigation();
+  const isFocused = useIsFocused();
 
-  componentDidMount() {
-    const {navigation} = this.props;
-   // navigation.addListener('didFocus', this.onScreenFocus);
-  }
+  let { favorites, isLoading, fetchFavorites} = props;  
 
-  onScreenFocus() {
-    //this.props.fetchFavorites();
-  }
-
-  recipeClicked(recipe: Recipe) {
-    let {navigation} = this.props;
-      navigation.navigate('Detail', {
-        recipeId: recipe.idMeal,
-        favorite: recipe.favorite
+  const recipeClicked = (recipe: Recipe) => {
+  
+    navigation?.navigate('Detail', {
+      recipeId: recipe.idMeal,
+      favorite: recipe.favorite
     });
   }
 
-  recipeLiked(id:  number) {
-    const {setFavorite, fetchFavorites} = this.props;
-    setFavorite(id);
-    setTimeout(function(){ fetchFavorites() }, 1000);
+  const recipeLiked = (recipeItem:  Recipe) => {
+    //props.setFavorite(recipeItem);
+    const {setFavorite, fetchFavorites} = props;
+    setFavorite(recipeItem);
+    setTimeout(()=>{ fetchFavorites() }, 1000);
   }
 
-  render() {
-    let {recipes} = this.props;  
-    return(
-      <Container>
-        <View>
-          {recipes ?<FlatList  data={recipes} keyExtractor={item => item["idMeal"]} renderItem={({item}) => <RecipeCard likeRecipe={this.recipeLiked} callRecipe={this.recipeClicked} size={1}  recipe={item} />} />:  null}
-        </View>    
-      </Container>
-    );
+  useEffect(()=>{
+    fetchFavorites();
+  },[]);
+
+  useEffect(()=>{
+    fetchFavorites();
+  },[isFocused])
+
+  if(!isLoading) {
+    return (
+      <SkeletonList/>
+    )
   }
+
+  return (
+    <Container>
+      <View>
+        {favorites ?<FlatList  data={favorites} keyExtractor={item => item["idMeal"].toString()} renderItem={({item}) => <RecipeCard likeRecipe={()=>{ recipeLiked(item)}} callRecipe={()=>{recipeClicked(item)}} size={1}  recipe={item} />} />:  null}
+      </View>    
+    </Container>
+  )
 }
 
 const Container = styled.View`
 flex:1
 `
-
-
 const mapStateToProps = (state: any) => {
-  const { isLoading } = state.setDetailLoading;
-  const {favorites} = state.fetchRecipes;
-  return {"isLoading": isLoading, "recipes": favorites};
+  const { isLoading } = state.setLoading;
+  const { favorites} = state.setFavorites;
+  return {"isLoading": isLoading, "favorites":favorites};
 }
 
 const mapDispatchToProps = (dispatch: any) =>{

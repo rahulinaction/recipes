@@ -6,14 +6,17 @@ import {bindActionCreators} from 'redux';
 import RecipeFull from '../components/RecipeFull';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styled from 'styled-components/native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, RouteProp } from '@react-navigation/native';
 
+
+type RouteParams = {
+  recipeId?: string;
+}
 
 interface DetailProps {
-   navigation: any,
    fetchRecipe: any,
    recipe: any,
-   route: any,
+   route:  RouteProp<Record<string, RouteParams>, ''>,
    isLoading: boolean,
    setDetailLoading: any,
    setFavorite: any,
@@ -26,7 +29,7 @@ interface DetailsState {
 };
 
 const RecipeDetail = (props:DetailProps) => {
-  const navigation = useNavigation();
+
   const { recipe } = props;
 
   /*static navigationOptions = ({ navigation }: any) => ({
@@ -39,12 +42,15 @@ const RecipeDetail = (props:DetailProps) => {
     let {route, fetchRecipe} = props;
     let recipeId = route?.params?.recipeId;
     //Testing for loader
-    fetchRecipe(recipeId);
+    if(recipeId) {
+      fetchRecipe(recipeId);
+    }
+
   },[]);
 
   return (
     <View>       
-    { recipe ? <RecipeFull recipe={recipe} /> : null }
+    { recipe ? <RecipeFull  recipe={recipe} /> : null }
     </View>   
   )
 }

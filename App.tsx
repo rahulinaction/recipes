@@ -12,12 +12,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Provider } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {RootStackParamList} from './RootStackParams';
+import { RootStackParamList } from './RootStackParams';
 import { realmContext} from './schema/realm';
 //Screens
 import RecipeList from './screens/RecipeList';
 import RecipeDetail from './screens/RecipeDetail';
 import RecipeFavorite from './screens/RecipeFavorite';
+import IngredientsList from './screens/IngredientsList';
 import store from './store';
 
 /* Store addition */
@@ -32,6 +33,8 @@ const HomeScreen = () => {
     <Stack.Navigator >
       <Stack.Screen name="List" component={RecipeList} />
       <Stack.Screen name="Detail" component={RecipeDetail} />
+      <Stack.Screen name="IngredientsList" component={IngredientsList} />
+      <Stack.Screen name="IngredientsDetail" component={RecipeDetail} />
    </Stack.Navigator>
   )
 }
@@ -39,8 +42,8 @@ const HomeScreen = () => {
 const FavoriteScreen = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="List" component={RecipeFavorite} />
-      <Stack.Screen name="Detail" component={RecipeDetail} />
+      <Stack.Screen name="FavoritesList" component={RecipeFavorite} />
+      <Stack.Screen name="FavoriteDetail" component={RecipeDetail} />
     </Stack.Navigator>  
   )
 
