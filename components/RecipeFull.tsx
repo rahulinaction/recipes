@@ -6,14 +6,17 @@ import  AppConstants from  '../config/constants';
 import RecipeIngredient from '../components/RecipeIngredient';
 import styled from 'styled-components/native';
 import YoutubePlayer from "react-native-youtube-iframe";
+import { useNavigation, RouteProp } from '@react-navigation/native';
 
 type RecipeProps = {
   recipe: any
 };
 
 const RecipeFull = ({recipe}: RecipeProps) => {
+  
   let recipeContent = recipe[0];
   const [playing, setPlaying] = useState(false);
+  const navigation = useNavigation();
   let youtubeId = recipeContent?.strYoutube? recipeContent?.strYoutube.split("=")[1] : null;
   const userIngredientsText = 'Used Ingredients';
   let ingredients = [];
@@ -57,7 +60,11 @@ const RecipeFull = ({recipe}: RecipeProps) => {
           {ingredients.map((_ingredient, index)=>{
             const { ingredient, ingredientUrl} = _ingredient;
             return (
-              <TouchableOpacity key={ingredient?.toString()+"_"+index} >
+              <TouchableOpacity onPress={()=>{
+                navigation?.navigate('IngredientsList', {
+                  ingredient: ingredient,
+                });
+              }} key={ingredient?.toString()+"_"+index} >
                 <IngredientItem key={ingredient?.toString()+"_item_"+index} >
                   <SmallImage
                     resizeMode="cover"

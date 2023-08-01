@@ -48,6 +48,16 @@ export const fetchCategories = createReducer({}, {
   },
 });
 
+
+export const setIngredientRecipes = createReducer({}, {
+  [types.SET_INGREDIENT_RECIPES](state: RootState, action: IActionRecipes) {
+    let newState = {... state, "recipes": action.recipes };
+    return newState;
+  },
+});
+
+  
+
 //State for all the list of recipes
 export const fetchRecipes = createReducer({}, {
   [types.SET_RECIPES](state: RootState, action: IActionRecipes) {

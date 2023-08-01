@@ -8,7 +8,7 @@ import { RecipeCategory } from '../models/RecipeCategory';
 import { Recipe } from '../models/Recipe';
 import type { PickerItem } from 'react-native-woodpicker';
 import { Picker } from 'react-native-woodpicker';
-import {NavigationProp, ParamListBase} from '@react-navigation/native';
+import {NavigationProp, ParamListBase, useNavigation} from '@react-navigation/native';
 import styled from 'styled-components/native';
 import { realmConfig } from '../schema/realm';
 import { useDispatch, useSelector} from "react-redux";
@@ -42,8 +42,6 @@ interface ListState {
   init: boolean
 };
 
-const gridValue = 'Grid';
-
 
 const RecipeList = (props: ListProps) => {
   const [ numColumns, setNumColumns] = useState<number>(1);
@@ -53,6 +51,7 @@ const RecipeList = (props: ListProps) => {
   let { recipes, filteredCategories, pickerValue, isLoading} = props;  
    //   let {search, numColumns} = this.state;
   const data: Array<PickerItem> = filteredCategories;   
+  const navigation = useNavigation();
 
   useEffect(()=>{
     props?.fetchCategories();
@@ -60,7 +59,7 @@ const RecipeList = (props: ListProps) => {
   },[]);
 
   const recipeClicked = (recipe: Recipe) => {
-    let {navigation} = props;
+    
     navigation?.navigate('Detail', {
       recipeId: recipe.idMeal,
       favorite: recipe.favorite

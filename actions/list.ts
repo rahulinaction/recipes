@@ -31,9 +31,9 @@ export const fetchRecipes = (category: string) => {
     dispatch(setLoading(false));
     await delay(500); //Added to show a loading mechanism
     return Api.get(uri,{}).then(resp => {   
-      let data = resp.data;
+      const data = resp.data;
       //Sanitize and add flag here
-      let meals = data["meals"];
+      const meals = data["meals"];
       //We add this for our computation
       for(let meal of meals) {
         meal["favorite"] = recipeIds.includes(meal["idMeal"]) ;
@@ -55,9 +55,11 @@ export const setFavorite = (recipe: Recipe) => {
         strMealThumb: recipe.strMealThumb,
         idMeal: recipe.idMeal,
         favorite: !favorite,
+        date: new Date(),
       };
 
       //Update recipe state
+      
       realm.write(() => {
         if(favorite){
           let fetchedRecipe = realm.objects("RecipeLite").filtered('idMeal= $0', recipe.idMeal);
@@ -79,11 +81,14 @@ export const setFavorite = (recipe: Recipe) => {
 //Refactor realm connections
 export const fetchFavorites = () => {
   return async (dispatch: any,  getState: ()=> RootState) => {
-    Realm.open(realmConfig).then((realm)=>{
-      let recipes = realm.objects<Recipe[]>('RecipeLite').toJSON();
-      dispatch(setFavorites(recipes as Recipe[]))
+    dispatch(setLoading(false));
+    Realm.open(realmConfig).then( async (realm)=>{
+      await delay(500);
+      let recipes = realm.objects<Recipe[]>('RecipeLite').sorted('date', true).toJSON();
+      dispatch(setLoading(true));
+      dispatch(setFavorites(recipes as Recipe[]));
     }).catch((error)=>{
-      console.log("Error is:",error);
+      dispatch(setLoading(false));
     })
   }  
 }
@@ -110,6 +115,30 @@ export const  fetchCategories = () => {
   }
 }
 
+//Fetch ingredients
+
+export const fetchIngredients = (ingredient: string) =>{
+  let alteredIngredient = ingredient.toLowerCase().replace(" ","_");
+  let uri = `filter.php?i=${alteredIngredient}`;
+
+
+  return async (dispatch: any,  getState: ()=> RootState) => {
+    const realm = await  Realm.open(realmConfig);
+    const recipeIds: string[] = realm.objects<Recipe[]>('RecipeLite').toJSON().map(recipe=> recipe.idMeal) as string[];
+    dispatch(setLoading(true));
+    return Api.get(uri,{}).then(resp => {
+      const data = resp.data;
+      const  meals  = data["meals"];
+      for(let meal of meals) {
+        meal["favorite"] = recipeIds.includes(meal["idMeal"]) ;
+      }
+      dispatch(setIngredientRecipes(meals));      
+    }).catch( (ex: Error) => {
+      console.log('Fetched ingredient',ex);
+      dispatch(setLoading(false));
+    });
+  }
+}
 
 
 export const setFetchedRecipes = (recipes: Recipe[]) => {
@@ -133,9 +162,18 @@ export const setFetchedCategories = (categories: RecipeCategory[]) => {
   }
 }
 
+
+
 export const setFavorites = (recipes: Recipe[]) => {
   return {
     type: types.SET_FAVORITES,
+    recipes
+  }
+}
+
+export const setIngredientRecipes = (recipes: Recipe[]) => {
+  return {
+    type: types.SET_INGREDIENT_RECIPES,
     recipes
   }
 }
