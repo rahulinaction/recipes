@@ -25,7 +25,7 @@ import store from './store';
 
 /* Store addition finish */
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator<RootStackParamList>();
+const Stack = createStackNavigator();
 
 
 const HomeScreen = () => {

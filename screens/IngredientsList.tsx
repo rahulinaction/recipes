@@ -9,7 +9,6 @@ import {bindActionCreators} from 'redux';
 import styled from 'styled-components/native';
 import { connect } from 'react-redux';
 import RecipeCard from '../components/RecipeCard';
-
 import { useNavigation, useIsFocused, RouteProp } from '@react-navigation/native';
 import SkeletonList from '../components/common/SkeletonList';
 
