@@ -1,7 +1,6 @@
 export type RootStackParamList = {
   RecipeList: undefined;
-  RecipeDetail: undefined;
+  RecipeDetail: { recipeId?: string; favorite: boolean};
   RecipeFavorite: undefined;
- // HomeScreen: undefined;
- // FavoriteScreen: undefined;
+  IngredientsList: {ingredient?: any };
 };

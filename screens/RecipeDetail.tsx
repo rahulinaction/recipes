@@ -1,11 +1,10 @@
 import React,{Component, useState, useEffect} from 'react';
 import {View} from 'react-native';
 import { connect } from 'react-redux';
-import { ActionCreators } from '../actions';
+import {ActionCreators} from '../actions';
 import {bindActionCreators} from 'redux';
 import RecipeFull from '../components/RecipeFull';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import styled from 'styled-components/native';
 import { useNavigation, RouteProp } from '@react-navigation/native';
 
 
@@ -13,22 +12,17 @@ type RouteParams = {
   recipeId?: string;
 }
 
-interface DetailProps {
-   fetchRecipe: any,
+interface RecipeProps {
+   fetchRecipe: (recipeId: string)=>void,
    recipe: any,
-   route:  RouteProp<Record<string, RouteParams>, ''>,
-   isLoading: boolean,
-   setDetailLoading: any,
-   setFavorite: any,
-   favorite: string
+   route: any,
+   isLoading: boolean
 };
+//RouteProp<Record<string, RouteParams>, ''>
 
-interface DetailsState {
-  isLoading: string | boolean,
-  recipe: any
-};
 
-const RecipeDetail = (props:DetailProps) => {
+
+const RecipeDetail = (props:RecipeProps) => {
 
   const { recipe } = props;
 
@@ -58,7 +52,7 @@ const RecipeDetail = (props:DetailProps) => {
 //@todo Move in selectors
 const mapStateToProps = (state: any) =>{
   const { isLoading } = state.setDetailLoading;
-  const { recipe} = state.fetchRecipe;
+  const { recipe } = state.fetchRecipe;
   return {"isLoading": isLoading, "recipe": recipe};
 }
  

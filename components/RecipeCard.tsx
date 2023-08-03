@@ -14,7 +14,6 @@ type RecipeCardProps = {
   likeRecipe: (_id: Recipe)=> void
 };
 
-
 const RecipeCard = ({recipe,size,callRecipe, likeRecipe}: RecipeCardProps) => {
     
   let likeColor = "#000";
@@ -50,7 +49,7 @@ const RecipeCard = ({recipe,size,callRecipe, likeRecipe}: RecipeCardProps) => {
               PlaceholderContent={<ActivityIndicator />}
               source={{ uri: recipe.strMealThumb }}
             />
-            <RecipeText numberOfLines={1} h5>{recipe.strMeal}</RecipeText>
+            <RecipeText numberOfLines={1}>{recipe.strMeal}</RecipeText>
             <StyledDivider/>
             <LowerCardContainer>
               <ColumnContainer>

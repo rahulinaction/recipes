@@ -9,47 +9,31 @@ import { Recipe } from '../models/Recipe';
 import type { PickerItem } from 'react-native-woodpicker';
 import { Picker } from 'react-native-woodpicker';
 import {NavigationProp, ParamListBase, useNavigation} from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList} from '../RootStackParams'
 import styled from 'styled-components/native';
 import { realmConfig } from '../schema/realm';
 import { useDispatch, useSelector} from "react-redux";
-
 //Components
 import RecipeCard from '../components/RecipeCard';
 import SkeletonList from '../components/common/SkeletonList';
 
 interface ListProps {
-  fetchCategories: ()=>void,
-  fetchFavorites: ()=>void,
   categories: RecipeCategory[],
   filteredCategories:  Array<PickerItem>,
   recipes: Recipe[],
-  fetchRecipes: (_categoryName:string)=> void,
   pickerValue: PickerItem,
+  isLoading: boolean,
+  fetchRecipes: any,
+  fetchCategories: ()=>void,
+  fetchFavorites: ()=>void,
   setPickerValue: (_value: PickerItem)=>void,
-  navigation: NavigationProp<ParamListBase>,
-  init: boolean,
-  setFavorite: (recipe: Recipe)=>void,
-  isLoading: boolean 
+  setFavorite: (recipe: Recipe)=>void
 };
-
-interface ListState {
-  isLoading: boolean| string,
-  categories:RecipeCategory[],
-  filteredCategories: Array<PickerItem>,
-  recipes:Recipe[],
-  numColumns: number,
-  search: string,
-  init: boolean
-};
-
 
 const RecipeList = (props: ListProps) => {
   const [ numColumns, setNumColumns] = useState<number>(1);
- // const [ recipes, setRecipes] = useState<Recipe[]>([]);
-  const [ hasLoaded, setHasLoaded] = useState<boolean>(false);
-
   let { recipes, filteredCategories, pickerValue, isLoading} = props;  
-   //   let {search, numColumns} = this.state;
   const data: Array<PickerItem> = filteredCategories;   
   const navigation = useNavigation();
 
@@ -59,11 +43,11 @@ const RecipeList = (props: ListProps) => {
   },[]);
 
   const recipeClicked = (recipe: Recipe) => {
-    
-    navigation?.navigate('Detail', {
+    const route = "Detail";
+    navigation.navigate(route as never, {
       recipeId: recipe.idMeal,
       favorite: recipe.favorite
-    });
+    } as never);
   }
 
   const recipeLiked = (recipeItem:  Recipe) => {
@@ -96,21 +80,6 @@ const RecipeList = (props: ListProps) => {
   )
 }
 
-//@todo move in selectors redux toolkit
-const  mapStateToProps =(state: any) => {
-  const { isLoading } = state.setLoading;
-  const {categories, filteredCategories} = state.fetchCategories;
-  let { pickerValue} = state.setPickerValue;
-  const {recipes} = state.fetchRecipes;
-  const cats = typeof categories!=="undefined"? categories: [];
-  const filterCats = typeof filteredCategories!=="undefined"? filteredCategories: [];
-  pickerValue = typeof pickerValue!=="undefined"? pickerValue: {label:"",value:""};
-  return {"isLoading": isLoading, "categories": cats, "recipes": recipes, "filteredCategories": filterCats, pickerValue: pickerValue };
-}
-
-const mapDispatchToProps = (dispatch: any) =>{
-  return bindActionCreators(ActionCreators, dispatch);
-}
 
 //Adding styled components
 const Container = styled.View`
@@ -120,7 +89,6 @@ const Container = styled.View`
 const StyledFlatList = styled.FlatList`
   marginHorizontal: 10;
 `
-
 const ListButton = styled(Button).attrs({
   containerStyle: {
     marginBottom:15
@@ -141,7 +109,22 @@ border-color:red;
 border-width:1px;
 border-radius: 4px;
 `;
- 
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecipeList);
+//@todo move in selectors redux toolkit
+const  mapStateToProps =(state: any) => {
+  const { isLoading } = state.setLoading;
+  const {recipes} = state.fetchRecipes;
+  let {categories, filteredCategories} = state.fetchCategories;
+  let { pickerValue} = state.setPickerValue;
+  categories = typeof categories!=="undefined"? categories: [];
+  filteredCategories = typeof filteredCategories!=="undefined"? filteredCategories: [];
+  pickerValue = typeof pickerValue!=="undefined"? pickerValue: {label:"",value:""};
+  return {isLoading, categories, recipes, filteredCategories, pickerValue };
+}
+
+const mapDispatchToProps = (dispatch: any) =>{
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+export default  connect(mapStateToProps, mapDispatchToProps)(RecipeList);
 

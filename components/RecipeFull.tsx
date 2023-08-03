@@ -61,9 +61,9 @@ const RecipeFull = ({recipe}: RecipeProps) => {
             const { ingredient, ingredientUrl} = _ingredient;
             return (
               <TouchableOpacity onPress={()=>{
-                navigation?.navigate('IngredientsList', {
+                navigation?.navigate('IngredientsList' as never, {
                   ingredient: ingredient,
-                });
+                } as never);
               }} key={ingredient?.toString()+"_"+index} >
                 <IngredientItem key={ingredient?.toString()+"_item_"+index} >
                   <SmallImage

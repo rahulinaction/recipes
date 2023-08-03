@@ -12,16 +12,10 @@ import { useNavigation, useIsFocused } from '@react-navigation/native';
 import SkeletonList from '../components/common/SkeletonList';
 
 interface RecipeProps {
-  navigation: NavigationProp<ParamListBase>,
   favorites: Recipe[],
   setFavorite: (recipe:Recipe)=>void,
   fetchFavorites: ()=>void,
   isLoading: boolean
- };
- 
- interface RecipeState {
-  isLoading: boolean,
-  recipes: Recipe[]
  };
  
 const RecipeFavorite = (props: RecipeProps) => {
@@ -32,10 +26,10 @@ const RecipeFavorite = (props: RecipeProps) => {
 
   const recipeClicked = (recipe: Recipe) => {
   
-    navigation?.navigate('Detail', {
+    navigation?.navigate('Detail' as never, {
       recipeId: recipe.idMeal,
       favorite: recipe.favorite
-    });
+    } as never);
   }
 
   const recipeLiked = (recipeItem:  Recipe) => {
@@ -81,4 +75,4 @@ const mapDispatchToProps = (dispatch: any) =>{
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecipeFavorite);;
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeFavorite);

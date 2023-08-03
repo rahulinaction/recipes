@@ -18,8 +18,8 @@ type RouteParams = {
 }
 
 interface RecipeProps {
-  navigation: NavigationProp<ParamListBase>,
-  route: RouteProp<Record<string, RouteParams>, ''>,
+  //route: RouteProp<Record<string, RouteParams>, ''>,
+  route: any,
   recipes: Recipe[],
   setFavorite: (recipe:Recipe)=>void,
   fetchFavorites: ()=>void,
@@ -27,11 +27,7 @@ interface RecipeProps {
   isLoading: boolean
  };
  
- interface RecipeState {
-  isLoading: boolean,
-  recipes: Recipe[]
- };
-
+ 
 const IngredientsList = (props: RecipeProps) => {
   const navigation = useNavigation();
   const { recipes }  = props;
@@ -46,10 +42,10 @@ const IngredientsList = (props: RecipeProps) => {
   
   const recipeClicked = (recipe: Recipe) => {
 
-    navigation?.navigate('Detail', {
+    navigation?.navigate('Detail' as never, {
       recipeId: recipe.idMeal,
       favorite: recipe.favorite
-    });
+    } as never);
   }
 
   const recipeLiked = (recipeItem:  Recipe) => {
