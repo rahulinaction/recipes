@@ -42,7 +42,7 @@ const IngredientsList = (props: RecipeProps) => {
   
   const recipeClicked = (recipe: Recipe) => {
 
-    navigation?.navigate('Detail' as never, {
+    navigation?.navigate('IngredientsDetail' as never, {
       recipeId: recipe.idMeal,
       favorite: recipe.favorite
     } as never);
