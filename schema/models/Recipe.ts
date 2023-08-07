@@ -1,4 +1,3 @@
-import React from 'react';
 import Realm from 'realm';
 
 //Recipe Lite model

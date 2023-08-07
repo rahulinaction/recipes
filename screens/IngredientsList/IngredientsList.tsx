@@ -1,46 +1,42 @@
 import React, {useEffect, useState} from 'react';
 import { View, FlatList} from 'react-native';
-import RecipeFull from '../components/RecipeFull';
+import RecipeFull from '../../components/RecipeFull';
 //Creating hooks components
 import {NavigationProp, ParamListBase} from '@react-navigation/native';
-import { Recipe } from '../models/Recipe';
-import {ActionCreators} from '../actions';
-import {bindActionCreators} from 'redux';
-import styled from 'styled-components/native';
-import { connect } from 'react-redux';
-import RecipeCard from '../components/RecipeCard';
+import { Recipe } from '../../models/Recipe';
+import { useDispatch } from 'react-redux';
+import RecipeCard from '../../components/RecipeCard';
 import { useNavigation, useIsFocused, RouteProp } from '@react-navigation/native';
-import SkeletonList from '../components/common/SkeletonList';
+import { useAppSelector } from '../../store/index';
 
+import SkeletonList from '../../components/common/SkeletonList';
+import { Container } from '../../components/styles/general.style';
+import { fetchIngredients, setFavoriteRecipe } from '../../store/slices/ingredientSlice';
 type RouteParams = {
   ingredient?: string;
 }
 
 interface RecipeProps {
   //route: RouteProp<Record<string, RouteParams>, ''>,
-  route: any,
-  recipes: Recipe[],
-  setFavorite: (recipe:Recipe)=>void,
-  fetchFavorites: ()=>void,
-  fetchIngredients:(ingredient: string) => void,
-  isLoading: boolean
+  route: any
  };
  
  
 const IngredientsList = (props: RecipeProps) => {
   const navigation = useNavigation();
-  const { recipes }  = props;
+  const dispatch = useDispatch();
+  const recipes = useAppSelector<Recipe[]>((state) => state.ingredient.recipes);
+  const hasLoaded = useAppSelector<boolean>((state) => state.ingredient.hasLoaded);
   
   useEffect(()=>{
-    const {route, fetchIngredients} = props;
+    const {route} = props;
     const ingredient = route?.params?.ingredient;
     if(ingredient){
-      fetchIngredients(ingredient);
+      dispatch(fetchIngredients(ingredient));
     }
   },[]);
   
   const recipeClicked = (recipe: Recipe) => {
-
     navigation?.navigate('IngredientsDetail' as never, {
       recipeId: recipe.idMeal,
       favorite: recipe.favorite
@@ -48,7 +44,13 @@ const IngredientsList = (props: RecipeProps) => {
   }
 
   const recipeLiked = (recipeItem:  Recipe) => {
-    props.setFavorite(recipeItem);
+    dispatch(setFavoriteRecipe(recipeItem));
+  }
+
+  if(!hasLoaded) {
+    return (
+      <SkeletonList/>
+    )
   }
 
   return (
@@ -60,18 +62,4 @@ const IngredientsList = (props: RecipeProps) => {
   )  
 }
 
-const Container = styled.View`
-  flex:1;
-`;
-
-const mapStateToProps = (state: any) => {
-  const { isLoading } = state.setLoading;
-  const { recipes} = state.setIngredientRecipes;
-  return {"isLoading": isLoading, "recipes":recipes};
-}
-
-const mapDispatchToProps = (dispatch: any) =>{
-  return bindActionCreators(ActionCreators, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(IngredientsList);;
+export default IngredientsList;

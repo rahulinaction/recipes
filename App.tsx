@@ -7,6 +7,7 @@
  */
 
 import React from 'react';
+import { View} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -15,10 +16,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { RootStackParamList } from './RootStackParams';
 import { realmContext} from './schema/realm';
 //Screens
-import RecipeList from './screens/RecipeList';
-import RecipeDetail from './screens/RecipeDetail';
-import RecipeFavorite from './screens/RecipeFavorite';
-import IngredientsList from './screens/IngredientsList';
+import RecipeList from './screens/RecipeList/RecipeList';
+import RecipeDetail from './screens/RecipeDetail/RecipeDetail';
+import RecipeFavorite from './screens/FavoritesList/RecipeFavorite';
+import IngredientsList from './screens/IngredientsList/IngredientsList';
 import store from './store';
 
 /* Store addition */
@@ -26,7 +27,6 @@ import store from './store';
 /* Store addition finish */
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-
 
 const HomeScreen = () => {
   return (

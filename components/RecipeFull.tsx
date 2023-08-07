@@ -59,6 +59,7 @@ const RecipeFull = ({recipe}: RecipeProps) => {
           <IngredientInnerContainer>
           {ingredients.map((_ingredient, index)=>{
             const { ingredient, ingredientUrl} = _ingredient;
+          
             return (
               <TouchableOpacity onPress={()=>{
                 navigation?.navigate('IngredientsList' as never, {
