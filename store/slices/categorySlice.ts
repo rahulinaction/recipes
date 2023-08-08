@@ -1,9 +1,8 @@
-import { createAsyncThunk ,createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AsyncThunk,  createAsyncThunk ,createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RecipeCategory } from '../../models/RecipeCategory';
 import { Recipe } from '../../models/Recipe';
 import Api from '../../lib/api'
 import {getRecipesByCategory, updateRecipeFavorite} from '../utils/dataUtils';
-import {getRealmConnection} from '../../schema/realm';
 
 interface PickerValue {
   label: string,
@@ -58,13 +57,13 @@ const categorySlice = createSlice({
   extraReducers: (builder) => {
     // The `builder` callback form is used here because it provides correctly typed reducers from the action creators
     builder.addCase(fetchCategories.pending, (state, { payload }) => {
-      state.isLoading = false;
+      state.isLoading = true;
     })  
 
     builder.addCase(fetchCategories.fulfilled, (state, { payload }) => {
       state.categories = payload.categories;
       state.pickerValue = payload.categoryValue;
-      state.isLoading = true;
+      state.isLoading = false;
       state.recipes = payload.recipes as Recipe[];
     })
     builder.addCase(fetchCategories.rejected, (state, action) => {
@@ -73,13 +72,13 @@ const categorySlice = createSlice({
     })
 
     builder.addCase(updateCategory.pending, (state, { payload }) => {
-      state.isLoading = false;
+      state.isLoading = true;
     })
 
     builder.addCase(updateCategory.fulfilled, (state, { payload }) => {
       state.pickerValue = payload.categoryValue;
       state.recipes = payload.recipes as Recipe[];
-      state.isLoading = true;
+      state.isLoading = false;
     })
     builder.addCase(updateCategory.rejected, (state, action) => {
       state.error = action.error.message?.toString();
