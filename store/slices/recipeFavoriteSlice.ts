@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction, Slice} from "@reduxjs/toolkit";
 import { Recipe } from "../../models/Recipe";
-import Api from '../../lib/api';
 import { delay } from '../../lib/utils'
 import { getRealmConnection} from '../../schema/realm';
 import { updateRecipeFavorite} from '../utils/dataUtils';
@@ -17,25 +16,25 @@ const initialState: RecipeState = {
   error:""
 } 
 
-export const fetchRecipes = createAsyncThunk("recipes/fetchFavorites",async(thunkAPI)=>{
+export const fetchRecipes = createAsyncThunk("recipes/fetchFavorites",async():Promise<Recipe[]>=>{
   let realm = await getRealmConnection();
   await delay(500);
-  let recipes = realm.objects<Recipe[]>('RecipeLite').sorted('date', true).toJSON();
+  let recipes = realm.objects('RecipeLite').sorted('date', true).toJSON();
   //@todo adding typecast
+  //We have added a date field to sort it by date in realm
   recipes = recipes.map((recipe)=>{
     delete recipe['date'];
     return recipe;
   })
-  return recipes;  
+  return recipes as Recipe[];
 });
 //dispatch from here
-export const setFavoriteRecipe = createAsyncThunk("recipes/setFavorite",async(recipe: Recipe, thunkAPI)=>{
+export const setFavoriteRecipe = createAsyncThunk("recipes/setFavorite",async(recipe: Recipe):Promise<number>=>{
   let recipeId = await updateRecipeFavorite(recipe);
   return recipeId;
 });
 
-
-const recipeFavoriteSlice = createSlice({
+const recipeFavoriteSlice: Slice<RecipeState, {}, "recipe"> = createSlice({
   name: 'recipe',
   initialState,
   reducers: {
@@ -43,7 +42,7 @@ const recipeFavoriteSlice = createSlice({
   },
   extraReducers: (builder) => {
     // The `builder` callback form is used here because it provides correctly typed reducers from the action creators
-    builder.addCase(fetchRecipes.pending, (state, action) => {
+    builder.addCase(fetchRecipes.pending, (state) => {
       state.hasLoaded = false;
     })
 

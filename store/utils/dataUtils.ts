@@ -4,7 +4,7 @@ import Api from '../../lib/api';
 import {delay} from '../../lib/utils'
 import {getRealmConnection} from '../../schema/realm';
 //Recipe operations
-export const getRecipesByCategory = async (category: string) => {
+export const getRecipesByCategory = async (category: string): Promise<Recipe[]> => {
   const realm = await getRealmConnection();
   const recipeIds: string[] = realm.objects<Recipe[]>('RecipeLite').toJSON().map(recipe=> recipe.idMeal) as string[];
   const uri = `filter.php?c=${category}`;
@@ -21,7 +21,7 @@ export const getRecipesByCategory = async (category: string) => {
   return recipes;
 }
   
-export const updateRecipeFavorite = async(recipe: Recipe) => {
+export const updateRecipeFavorite = async(recipe: Recipe): Promise<number> => {
   let realm = await getRealmConnection();
   const favorite = recipe.favorite;
   const recipeObject = {
