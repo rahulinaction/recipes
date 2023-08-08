@@ -1,4 +1,4 @@
-import { AsyncThunk,  createAsyncThunk ,createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk ,createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import { RecipeCategory } from '../../models/RecipeCategory';
 import { Recipe } from '../../models/Recipe';
 import Api from '../../lib/api'
@@ -25,7 +25,7 @@ const initialState:RecipeCategoryState = {
   pickerValue: {label:"", value:""}
 } 
 
-export const fetchCategories = createAsyncThunk("categories/fetch",async(thunkAPI)=>{
+export const fetchCategories = createAsyncThunk("categories/fetch",async():Promise<{categories:RecipeCategory[], categoryValue: PickerValue, recipes:Recipe[]}>=>{
   const uri = "categories.php";
   const response = await Api.get(uri,{});
   const data = response.data;
@@ -36,20 +36,20 @@ export const fetchCategories = createAsyncThunk("categories/fetch",async(thunkAP
   return {categories, categoryValue:{label: categoryName, value: categoryName }, recipes };
 });
 
-export const updateCategory = createAsyncThunk("category/update",async(category: PickerValue, thunkAPI)=>{
+export const updateCategory = createAsyncThunk("category/update",async(category: PickerValue):Promise<{categoryValue:PickerValue, recipes:Recipe[]}>=>{
   let categoryName = category.value;
   const recipes = await getRecipesByCategory(categoryName);
   return {categoryValue: category, recipes };
 });
 
 
-export const setFavoriteRecipe = createAsyncThunk("category/setFavoriteRecipe",async(recipe: Recipe, thunkAPI)=>{
+export const setFavoriteRecipe = createAsyncThunk("category/setFavoriteRecipe",async(recipe: Recipe):Promise<number>=>{
   let recipeId = await updateRecipeFavorite(recipe);
   return recipeId;
 });
 
 
-const categorySlice = createSlice({
+const categorySlice: Slice<RecipeCategoryState, {}, "categories"> = createSlice({
   name: 'categories',
   initialState,
   reducers: {

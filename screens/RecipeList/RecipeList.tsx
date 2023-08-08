@@ -1,5 +1,5 @@
-import React,{ useEffect, useState } from 'react';
-import {FlatList} from 'react-native';
+import React,{ memo, useEffect, useState } from 'react';
+import {FlatList, View} from 'react-native';
 import {Button} from 'react-native-elements';
 import {  useDispatch } from 'react-redux';
 import { RecipeCategory } from '../../models/RecipeCategory'; 
@@ -22,6 +22,11 @@ interface PickerValue {
   value: string
 }
 
+interface RecipeItem {
+  item: Recipe
+}
+
+
 const RecipeList = () => {
   const [ numColumns, setNumColumns] = useState<number>(1); 
   const pickerValue = useAppSelector<PickerValue>((state) => state.category.pickerValue);
@@ -41,7 +46,7 @@ const RecipeList = () => {
     dispatch(fetchCategories());
   },[]);
 
-  const recipeClicked = (recipe: Recipe) => {
+  const recipeClicked = (recipe: Recipe):void => {
     const route = "Detail";
     navigation.navigate(route as never, {
       recipeId: recipe.idMeal,
@@ -49,12 +54,18 @@ const RecipeList = () => {
     } as never);
   }
 
-  const recipeLiked = (recipeItem:  Recipe) => {
+  const recipeLiked = (recipeItem:  Recipe):void => {
     dispatch(setFavoriteRecipe(recipeItem));
   }
 
+  const RenderItem = ({item}:RecipeItem): JSX.Element =>{
+    return (
+      <RecipeCard likeRecipe={()=>{recipeLiked(item)}} callRecipe= {()=>{recipeClicked(item)}} size={numColumns}  recipe={item} />
+    )
+  }
+
   //Category selected
-  const categorySelected = (value: PickerItem) =>{
+  const categorySelected = (value: PickerItem):void =>{
     dispatch(updateCategory(value));
   }
 
@@ -78,7 +89,15 @@ const RecipeList = () => {
       <ListButton title="List"  onPress={()=>{ setNumColumns(1)}} />
       <Button title="Grid" onPress={()=>{ setNumColumns(2)}} />
     </ButtonContainer>
-    {  recipes && recipes.length>0 ?<FlatList  contentContainerStyle={{alignItems:"center"}}  key = {( numColumns==2 ) ? 1 : 0 } numColumns={numColumns} data={recipes} keyExtractor={(item: Recipe) => item["idMeal"].toString()} renderItem={({item}) => <RecipeCard likeRecipe={()=>{recipeLiked(item)}} callRecipe= {()=>{recipeClicked(item)}} size={numColumns}  recipe={item} />} />: null}
+    {  recipes && recipes.length>0 ?<FlatList  
+                                      contentContainerStyle={{alignItems:"center"}}  
+                                      key = {( numColumns==2 ) ? 1 : 0 } 
+                                      numColumns={numColumns} 
+                                      data={recipes} 
+                                      maxToRenderPerBatch={5}
+                                      keyExtractor={(item: Recipe) => item?.idMeal.toString()} 
+                                      renderItem={RenderItem}
+                                      />: null}
   </Container>    
   )
 }

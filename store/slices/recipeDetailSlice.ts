@@ -1,4 +1,4 @@
-import { createAsyncThunk ,createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk ,createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import { RecipeCategory } from '../../models/RecipeCategory'
 import Api from '../../lib/api'
 import { delay } from '../../lib/utils'
@@ -13,15 +13,16 @@ const initialState: RecipeState = {
   error: ""
 }
 
-export const fetchRecipe = createAsyncThunk("recipe/fetch",async(id:number ,thunkAPI)=>{
+export const fetchRecipe = createAsyncThunk("recipe/fetch",async(id:number):Promise<any>=>{
   const uri = 'lookup.php?i='+id;
 //    await delay(500);
   const response = await Api.get(uri,{});
   const data = response.data;
+  //@todo Have to type dynamic keys
   return data["meals"];
 });
 
-const recipeDetailSlice = createSlice({
+const recipeDetailSlice: Slice<RecipeState, {}, "recipeDetail"> = createSlice({
   name: 'recipeDetail',
   initialState,
   reducers: {},

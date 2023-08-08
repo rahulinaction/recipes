@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React,{ memo, useEffect, useState} from 'react';
 import { View, FlatList} from 'react-native';
 //Creating hooks components
 import {NavigationProp, ParamListBase} from '@react-navigation/native';
@@ -18,6 +18,11 @@ interface RecipeProps {
   //route: RouteProp<Record<string, RouteParams>, ''>,
   route: any
  };
+
+ interface RecipeItem {
+  item: Recipe
+}
+
  
  
 const IngredientsList = (props: RecipeProps) => {
@@ -34,14 +39,20 @@ const IngredientsList = (props: RecipeProps) => {
     }
   },[]);
   
-  const recipeClicked = (recipe: Recipe) => {
+  const recipeClicked = (recipe: Recipe):void => {
     navigation?.navigate('IngredientsDetail' as never, {
       recipeId: recipe.idMeal,
       favorite: recipe.favorite
     } as never);
   }
 
-  const recipeLiked = (recipeItem:  Recipe) => {
+  const RenderItem = ({item}:RecipeItem): JSX.Element =>{
+    return (
+      <RecipeCard likeRecipe={()=>{ recipeLiked(item)}} callRecipe={()=>{recipeClicked(item)}} size={1}  recipe={item} />
+    )
+  }
+
+  const recipeLiked = (recipeItem:  Recipe):void => {
     dispatch(setFavoriteRecipe(recipeItem));
   }
 
@@ -54,7 +65,11 @@ const IngredientsList = (props: RecipeProps) => {
   return (
     <Container>
     <View>
-      {recipes && recipes.length >0  ?<FlatList  data={recipes} keyExtractor={item => item["idMeal"].toString()} renderItem={({item}) => <RecipeCard likeRecipe={()=>{ recipeLiked(item)}} callRecipe={()=>{recipeClicked(item)}} size={1}  recipe={item} />} />:  null}
+      {recipes && recipes.length >0  ?<FlatList  
+                                        data={recipes} 
+                                        maxToRenderPerBatch={5}
+                                        keyExtractor={(item: Recipe) => item?.idMeal.toString()} 
+                                        renderItem={RenderItem} />:  null}
     </View>    
   </Container>
   )  

@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction, Slice} from "@reduxjs/toolkit";
 import { Recipe } from "../../models/Recipe";
 import Api from '../../lib/api';
 import {delay} from '../../lib/utils'
@@ -16,7 +16,7 @@ const initialState:RecipeState = {
   hasLoaded: false
 } 
 
-export const fetchIngredients = createAsyncThunk("ingredients/fetch",async(ingredient:string ,thunkAPI)=>{
+export const fetchIngredients = createAsyncThunk("ingredients/fetch",async(ingredient:string):Promise<Recipe[]>=>{
   await delay(500);
   const realm = await getRealmConnection();
   const alteredIngredient = ingredient.toLowerCase().replace(" ","_");
@@ -33,13 +33,13 @@ export const fetchIngredients = createAsyncThunk("ingredients/fetch",async(ingre
   return recipes;
 });
 
-export const setFavoriteRecipe = createAsyncThunk("ingredients/setFavoriteRecipe",async(recipe: Recipe, thunkAPI)=>{
+export const setFavoriteRecipe = createAsyncThunk("ingredients/setFavoriteRecipe",async(recipe: Recipe):Promise<number>=>{
   let recipeId = await updateRecipeFavorite(recipe);
   return recipeId;
 });
 
 
-const ingredientSlice = createSlice({
+const ingredientSlice: Slice<RecipeState, {}, "ingredients"> = createSlice({
   name: 'ingredients',
   initialState,
   reducers: {},
@@ -78,30 +78,3 @@ const ingredientSlice = createSlice({
 });
 
 export default ingredientSlice.reducer;
-
-  
-
-//Fetch ingredients
-
-/*export const fetchIngredients = (ingredient: string) =>{
-    let alteredIngredient = ingredient.toLowerCase().replace(" ","_");
-    let uri = `filter.php?i=${alteredIngredient}`;
-  
-  
-    return async (dispatch: any,  getState: ()=> RootState) => {
-      const realm = await  Realm.open(realmConfig);
-      const recipeIds: string[] = realm.objects<Recipe[]>('RecipeLite').toJSON().map(recipe=> recipe.idMeal) as string[];
-      dispatch(setLoading(true));
-      return Api.get(uri,{}).then(resp => {
-        const data = resp.data;
-        const  meals  = data["meals"];
-        for(let meal of meals) {
-          meal["favorite"] = recipeIds.includes(meal["idMeal"]) ;
-        }
-        dispatch(setIngredientRecipes(meals));      
-      }).catch( (ex: Error) => {
-        console.log('Fetched ingredient',ex);
-        dispatch(setLoading(false));
-      });
-    }
-  }*/
