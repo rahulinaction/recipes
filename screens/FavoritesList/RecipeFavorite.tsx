@@ -1,19 +1,18 @@
 import React,{useEffect} from 'react';
 import {View, FlatList} from 'react-native';
 import {Recipe} from '../../models/Recipe';
-import { useDispatch } from 'react-redux';
 import RecipeCard from '../../components/RecipeCard';
 import {NavigationProp, ParamListBase} from '@react-navigation/native';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import SkeletonList from '../../components/common/SkeletonList';
 import { Container } from '../../components/styles/general.style';
 import { fetchRecipes, setFavoriteRecipe } from '../../store/slices/recipeFavoriteSlice';
-import { useAppSelector } from '../../store/index';
+import { useAppSelector, useAppDispatch } from '../../store/index';
 
 
 const RecipeFavorite = () => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const isFocused = useIsFocused();
   const recipes = useAppSelector<Recipe[]>(state=>state.recipeFavorite.recipes);
   const hasLoaded = useAppSelector<boolean>(state=>state.recipeFavorite.hasLoaded);
@@ -47,7 +46,7 @@ const RecipeFavorite = () => {
   return (
     <Container>
       <View>
-        {recipes && hasLoaded ?<FlatList  data={recipes} keyExtractor={item => item["idMeal"].toString()} renderItem={({item}) => <RecipeCard likeRecipe={()=>{ recipeLiked(item)}} callRecipe={()=>{recipeClicked(item)}} size={1}  recipe={item} />} />:  null}
+        {hasLoaded && recipes && recipes.length>0  ?<FlatList  data={recipes} keyExtractor={item => item["idMeal"].toString()} renderItem={({item}) => <RecipeCard likeRecipe={()=>{ recipeLiked(item)}} callRecipe={()=>{recipeClicked(item)}} size={1}  recipe={item} />} />:  null}
       </View>    
     </Container>
   )

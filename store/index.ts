@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 //import thunkMiddleware from 'redux-thunk';
 //import reducer from '../reducers';
 import type { TypedUseSelectorHook } from 'react-redux';
@@ -34,5 +34,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch
+
 
 export default  store;

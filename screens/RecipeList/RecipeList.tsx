@@ -11,7 +11,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList} from '../../RootStackParams'
 //Styled components
 import {Container,StyledFlatList, ListButton, ButtonContainer, SelectContainer} from './RecipeList.style';
-import {useAppSelector} from '../../store/index';
+import {useAppSelector, useAppDispatch} from '../../store/index';
 import {fetchCategories, updateCategory, setFavoriteRecipe} from '../../store/slices/categorySlice';
 //Components
 import RecipeCard from '../../components/RecipeCard';
@@ -25,7 +25,7 @@ interface PickerValue {
 const RecipeList = () => {
   const [ numColumns, setNumColumns] = useState<number>(1); 
   const pickerValue = useAppSelector<PickerValue>((state) => state.category.pickerValue);
-  const hasLoaded = useAppSelector<boolean>((state) => state.category.isLoading);
+  const isLoading = useAppSelector<boolean>((state) => state.category.isLoading);
   const recipes = useAppSelector<Recipe[]>((state) => state.category.recipes);
   const categories = useAppSelector<RecipeCategory[]>((state) => state.category.categories);
 
@@ -34,7 +34,7 @@ const RecipeList = () => {
   });
   const data: Array<PickerItem> = filteredCategories;   
   const navigation = useNavigation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(()=>{
     //Fetches category and subsequent recipes
@@ -58,6 +58,10 @@ const RecipeList = () => {
     dispatch(updateCategory(value));
   }
 
+  if(isLoading) {
+    return (<SkeletonList/>)
+  }
+
   return (
     <Container>
     <SelectContainer>
@@ -74,7 +78,7 @@ const RecipeList = () => {
       <ListButton title="List"  onPress={()=>{ setNumColumns(1)}} />
       <Button title="Grid" onPress={()=>{ setNumColumns(2)}} />
     </ButtonContainer>
-    { hasLoaded && recipes ?<FlatList  contentContainerStyle={{alignItems:"center"}}  key = {( numColumns==2 ) ? 1 : 0 } numColumns={numColumns} data={recipes} keyExtractor={(item: Recipe) => item["idMeal"].toString()} renderItem={({item}) => <RecipeCard likeRecipe={()=>{recipeLiked(item)}} callRecipe= {()=>{recipeClicked(item)}} size={numColumns}  recipe={item} />} />: <SkeletonList />}
+    {  recipes && recipes.length>0 ?<FlatList  contentContainerStyle={{alignItems:"center"}}  key = {( numColumns==2 ) ? 1 : 0 } numColumns={numColumns} data={recipes} keyExtractor={(item: Recipe) => item["idMeal"].toString()} renderItem={({item}) => <RecipeCard likeRecipe={()=>{recipeLiked(item)}} callRecipe= {()=>{recipeClicked(item)}} size={numColumns}  recipe={item} />} />: null}
   </Container>    
   )
 }
