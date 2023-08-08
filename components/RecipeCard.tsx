@@ -6,7 +6,6 @@ import { ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styled from 'styled-components/native';
 
-
 type RecipeCardProps = {
   recipe: Recipe,
   callRecipe: (_recipe: Recipe)=> void,

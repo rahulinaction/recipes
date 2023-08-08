@@ -1,19 +1,40 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import {createLogger} from 'redux-logger';
-import reducer from '../reducers';
+import { useSelector, useDispatch } from 'react-redux';
+//import thunkMiddleware from 'redux-thunk';
+//import reducer from '../reducers';
+import type { TypedUseSelectorHook } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
 
-const loggerMiddleware = createLogger({predicate:(getState, action) => __DEV__ });
 
-const  configureStore = (initialState: object) => {
+//Importing reducers
+import category from './slices/categorySlice';
+import recipeFavorite from './slices/recipeFavoriteSlice';
+import ingredient from './slices/ingredientSlice';
+import recipeDetail from './slices/recipeDetailSlice'
+
+/*const  configureStoreOld = (initialState: object) => {
   const enhancer =  compose(applyMiddleware(thunkMiddleware));
   return createStore(reducer, initialState, enhancer);
 }
-const store =  configureStore({});
+const store =  configureStoreOld({});
+*/
+export const store = configureStore({
+  reducer: {
+    category,
+    ingredient,
+    recipeFavorite,
+    recipeDetail
+  }  
+})
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+
+
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch
+
 
 export default  store;
