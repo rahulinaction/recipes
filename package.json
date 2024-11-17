@@ -30,7 +30,7 @@
     "axios": "^0.21.2",
     "eslint-plugin-flowtype-errors": "^4.5.0",
     "react": "18.2.0",
-    "react-native": "0.71.7",
+    "react-native": "0.76.2",
     "react-native-elements": "^3.4.3",
     "react-native-gesture-handler": "^2.12.1",
     "react-native-reanimated": "^2.15.0",
