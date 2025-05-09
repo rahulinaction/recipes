@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
-    "@babel/runtime": "^7.9.2",
+    "@babel/runtime": "^7.27.1",
     "@react-native-community/eslint-config": "^1.0.0",
     "@react-native-community/slider": "^4.4.2",
     "@storybook/addon-actions": "^7.0.18",
